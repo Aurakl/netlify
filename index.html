@@ -598,7 +598,9 @@ footer{background:var(--ink);padding:3rem;display:flex;align-items:center;justif
         </div>
         <div class="reveal-right">
           <div class="contact-form-wrap">
-            <form id="contact-form">
+            <form id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+              <input type="hidden" name="form-name" value="contact"/>
+              <p style="display:none"><label>Ne pas remplir : <input name="bot-field"/></label></p>
               <div class="form-row">
                 <div class="form-group"><label>Prénom</label><input type="text" name="prenom" placeholder="Prénom" required/></div>
                 <div class="form-group"><label>Nom</label><input type="text" name="nom" placeholder="Nom" required/></div>
@@ -866,7 +868,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var el = document.getElementById(id); if (el) el.min = today;
   });
 
-  // ── CONTACT FORM ──
+  // ── CONTACT FORM (soumission directe via Netlify Forms, sans logiciel mail) ──
   document.getElementById('btn-contact-send').addEventListener('click', function() {
     var form = document.getElementById('contact-form');
     var prenom = form.querySelector('[name="prenom"]').value.trim();
@@ -874,14 +876,25 @@ document.addEventListener('DOMContentLoaded', function() {
     var contact = form.querySelector('[name="contact"]').value.trim();
     var message = form.querySelector('[name="message"]').value.trim();
     if (!prenom||!nom||!contact||!message) { alert('Merci de remplir tous les champs.'); return; }
-    openMailClient('Message depuis le site — ' + prenom + ' ' + nom, [
-      'Nom : ' + prenom + ' ' + nom,
-      'Contact : ' + contact,
-      '',
-      message
-    ]);
-    showModal('✉️', 'Votre messagerie va s\'ouvrir', 'Votre application mail va s\'ouvrir avec le message pré-rempli, à destination de ' + CONTACT_EMAIL + '. Il ne vous reste plus qu\'à cliquer sur "Envoyer".');
-    form.reset();
+    var btn = document.getElementById('btn-contact-send');
+    btn.disabled = true; btn.textContent = 'Envoi en cours…';
+    var body = new URLSearchParams(new FormData(form)).toString();
+    fetch('/', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body: body
+    }).then(function(res) {
+      if (res.ok) {
+        showModal('✉️', 'Message envoyé !', 'Merci pour votre message, il a été transmis à ' + CONTACT_EMAIL + '. Je vous répondrai dans les plus brefs délais.');
+        form.reset();
+      } else {
+        showModal('⚠️', 'Erreur', 'Une erreur est survenue. Contactez-moi directement par téléphone ou par email.');
+      }
+    }).catch(function() {
+      showModal('⚠️', 'Erreur réseau', 'Impossible d\'envoyer le message. Contactez-moi par téléphone ou par email.');
+    }).finally(function() {
+      btn.disabled = false; btn.textContent = 'Envoyer le message';
+    });
   });
 
   // ── MODAL ──
