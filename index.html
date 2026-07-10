@@ -343,24 +343,28 @@ footer{background:var(--ink);padding:3rem;display:flex;align-items:center;justif
     </div>
     <!-- FORM PATIENT -->
     <div class="side-form" id="side-form-patient">
-      <div class="side-form-group"><label>Prénom &amp; Nom *</label><input type="text" id="s-nom" placeholder="Prénom Nom"/></div>
-      <div class="side-form-group"><label>Téléphone *</label><input type="tel" id="s-tel" placeholder="07 XX XX XX XX"/></div>
-      <div class="side-form-group"><label>Date souhaitée *</label><input type="date" id="s-date"/></div>
-      <div class="side-form-group"><label>Heure * (09h–17h)</label><input type="time" id="s-heure" min="09:00" max="17:00"/></div>
-      <div class="side-form-group"><label>Type de soin *</label>
-        <select id="s-soin">
-          <option value="">Sélectionner...</option>
-          <option>Entretien infirmier / soutien</option>
-          <option>Préparation du pilulier</option>
-          <option>Injection retard (neuroleptique)</option>
-          <option>Surveillance &amp; étayage psychiatrique</option>
-          <option>Entretien motivationnel</option>
-          <option>Autre / première prise de contact</option>
-        </select>
-      </div>
-      <div class="side-form-group"><label>Adresse *</label><input type="text" id="s-adresse" placeholder="Rue, ville, NPA"/></div>
-      <div class="side-note">✉️ Un email avec votre demande sera préparé dans votre messagerie.</div>
-      <button class="side-submit" id="btn-book-patient">Confirmer le rendez-vous</button>
+      <form name="demande-patient" method="POST" data-netlify="true" netlify-honeypot="bot-field-patient">
+        <input type="hidden" name="form-name" value="demande-patient"/>
+        <p style="display:none"><label>Ne pas remplir : <input name="bot-field-patient"/></label></p>
+        <div class="side-form-group"><label>Prénom &amp; Nom *</label><input type="text" id="s-nom" placeholder="Prénom Nom"/></div>
+        <div class="side-form-group"><label>Téléphone *</label><input type="tel" id="s-tel" placeholder="07 XX XX XX XX"/></div>
+        <div class="side-form-group"><label>Date souhaitée *</label><input type="date" id="s-date"/></div>
+        <div class="side-form-group"><label>Heure * (09h–17h)</label><input type="time" id="s-heure" min="09:00" max="17:00"/></div>
+        <div class="side-form-group"><label>Type de soin *</label>
+          <select id="s-soin">
+            <option value="">Sélectionner...</option>
+            <option>Entretien infirmier / soutien</option>
+            <option>Préparation du pilulier</option>
+            <option>Injection retard (neuroleptique)</option>
+            <option>Surveillance &amp; étayage psychiatrique</option>
+            <option>Entretien motivationnel</option>
+            <option>Autre / première prise de contact</option>
+          </select>
+        </div>
+        <div class="side-form-group"><label>Adresse *</label><input type="text" id="s-adresse" placeholder="Rue, ville, NPA"/></div>
+        <div class="side-note">✉️ Votre demande est envoyée directement, sans passer par votre messagerie.</div>
+        <button class="side-submit" type="button" id="btn-book-patient">Confirmer le rendez-vous</button>
+      </form>
       <div class="side-tel-block">
         <div class="side-tel-label">Besoin d'aide ?</div>
         <a href="tel:+33647188840">📞 06.47.18.88.40</a>
@@ -369,34 +373,38 @@ footer{background:var(--ink);padding:3rem;display:flex;align-items:center;justif
     </div>
     <!-- FORM PRO -->
     <div class="side-form" id="side-form-pro" hidden>
-      <div class="side-form-group"><label>Prénom &amp; Nom *</label><input type="text" id="sp-nom" placeholder="Prénom Nom"/></div>
-      <div class="side-form-group"><label>Profession *</label>
-        <select id="sp-profession">
-          <option value="">Sélectionner...</option>
-          <option>Psychiatre</option>
-          <option>Médecin généraliste</option>
-          <option>Infirmier(e) CMS</option>
-          <option>Psychologue FSP</option>
-          <option>Assistant(e) social(e)</option>
-          <option>Équipe mobile psychiatrique</option>
-          <option>Autre</option>
-        </select>
-      </div>
-      <div class="side-form-group"><label>Téléphone *</label><input type="tel" id="sp-tel" placeholder="07 XX XX XX XX"/></div>
-      <div class="side-form-group"><label>Date souhaitée *</label><input type="date" id="sp-date"/></div>
-      <div class="side-form-group"><label>Heure * (09h–17h)</label><input type="time" id="sp-heure" min="09:00" max="17:00"/></div>
-      <div class="side-form-group"><label>Motif *</label>
-        <select id="sp-motif">
-          <option value="">Sélectionner...</option>
-          <option>Demande de suivi pour un patient</option>
-          <option>Coordination de soins</option>
-          <option>Relais post-hospitalisation</option>
-          <option>Réunion de synthèse / staff</option>
-          <option>Autre</option>
-        </select>
-      </div>
-      <div class="side-note">🏥 Un email avec votre demande sera préparé dans votre messagerie.</div>
-      <button class="side-submit" id="btn-book-pro">Envoyer la demande</button>
+      <form name="demande-pro" method="POST" data-netlify="true" netlify-honeypot="bot-field-pro">
+        <input type="hidden" name="form-name" value="demande-pro"/>
+        <p style="display:none"><label>Ne pas remplir : <input name="bot-field-pro"/></label></p>
+        <div class="side-form-group"><label>Prénom &amp; Nom *</label><input type="text" id="sp-nom" placeholder="Prénom Nom"/></div>
+        <div class="side-form-group"><label>Profession *</label>
+          <select id="sp-profession">
+            <option value="">Sélectionner...</option>
+            <option>Psychiatre</option>
+            <option>Médecin généraliste</option>
+            <option>Infirmier(e) CMS</option>
+            <option>Psychologue FSP</option>
+            <option>Assistant(e) social(e)</option>
+            <option>Équipe mobile psychiatrique</option>
+            <option>Autre</option>
+          </select>
+        </div>
+        <div class="side-form-group"><label>Téléphone *</label><input type="tel" id="sp-tel" placeholder="07 XX XX XX XX"/></div>
+        <div class="side-form-group"><label>Date souhaitée *</label><input type="date" id="sp-date"/></div>
+        <div class="side-form-group"><label>Heure * (09h–17h)</label><input type="time" id="sp-heure" min="09:00" max="17:00"/></div>
+        <div class="side-form-group"><label>Motif *</label>
+          <select id="sp-motif">
+            <option value="">Sélectionner...</option>
+            <option>Demande de suivi pour un patient</option>
+            <option>Coordination de soins</option>
+            <option>Relais post-hospitalisation</option>
+            <option>Réunion de synthèse / staff</option>
+            <option>Autre</option>
+          </select>
+        </div>
+        <div class="side-note">🏥 Votre demande est envoyée directement, sans passer par votre messagerie.</div>
+        <button class="side-submit" type="button" id="btn-book-pro">Envoyer la demande</button>
+      </form>
       <div class="side-tel-block">
         <div class="side-tel-label">Besoin d'aide ?</div>
         <a href="tel:+33647188840">📞 06.47.18.88.40</a>
@@ -811,12 +819,16 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('side-form-pro').hidden = false;
   });
 
-  // ── OUVERTURE DE L'AGENT MAIL (mailto) ──
-  function openMailClient(subject, bodyLines) {
-    var mailtoLink = 'mailto:' + CONTACT_EMAIL +
-      '?subject=' + encodeURIComponent(subject) +
-      '&body=' + encodeURIComponent(bodyLines.join('\n'));
-    window.location.href = mailtoLink;
+  // ── ENVOI DIRECT VIA NETLIFY FORMS (sans logiciel mail) ──
+  function submitNetlifyForm(formName, fields) {
+    var params = new URLSearchParams();
+    params.append('form-name', formName);
+    Object.keys(fields).forEach(function(key) { params.append(key, fields[key]); });
+    return fetch('/', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body: params.toString()
+    });
   }
 
   // ── SIDE PANEL RDV ──
@@ -829,16 +841,22 @@ document.addEventListener('DOMContentLoaded', function() {
     var adresse = document.getElementById('s-adresse').value.trim();
     if (!nom||!tel||!date||!heure||!soin||!adresse) { alert('Merci de remplir tous les champs (*).'); return; }
     if (heure < '09:00' || heure > '17:00') { alert('Les rendez-vous sont possibles entre 09h et 17h.'); return; }
-    openMailClient('Demande de suivi — ' + nom, [
-      'Nom : ' + nom,
-      'Téléphone : ' + tel,
-      'Date souhaitée : ' + date,
-      'Heure souhaitée : ' + heure,
-      'Type de soin : ' + soin,
-      'Adresse : ' + adresse
-    ]);
-    closeSidePanel();
-    showModal('📅', 'Votre messagerie va s\'ouvrir', 'Un email pré-rempli avec votre demande va s\'ouvrir dans votre application mail. Il ne vous reste plus qu\'à l\'envoyer, je vous confirme le rendez-vous par téléphone sous 30 minutes.');
+    var btn = document.getElementById('btn-book-patient');
+    btn.disabled = true; btn.textContent = 'Envoi en cours…';
+    submitNetlifyForm('demande-patient', {
+      nom: nom, telephone: tel, date: date, heure: heure, soin: soin, adresse: adresse
+    }).then(function(res) {
+      btn.disabled = false; btn.textContent = 'Confirmer le rendez-vous';
+      if (res.ok) {
+        closeSidePanel();
+        showModal('📅', 'Demande envoyée !', 'Votre demande a bien été transmise à ' + CONTACT_EMAIL + '. Je vous confirme le rendez-vous par téléphone sous 30 minutes.');
+      } else {
+        showModal('⚠️', 'Erreur', 'Une erreur est survenue. Merci de m\'appeler directement au 06.47.18.88.40.');
+      }
+    }).catch(function() {
+      btn.disabled = false; btn.textContent = 'Confirmer le rendez-vous';
+      showModal('⚠️', 'Erreur réseau', 'Impossible d\'envoyer la demande. Merci de m\'appeler directement au 06.47.18.88.40.');
+    });
   });
 
   document.getElementById('btn-book-pro').addEventListener('click', function() {
@@ -850,16 +868,22 @@ document.addEventListener('DOMContentLoaded', function() {
     var motif = document.getElementById('sp-motif').value;
     if (!nom||!profession||!tel||!date||!heure||!motif) { alert('Merci de remplir tous les champs (*).'); return; }
     if (heure < '09:00' || heure > '17:00') { alert('Les rendez-vous sont possibles entre 09h et 17h.'); return; }
-    openMailClient('Demande de coordination — ' + nom + ' (' + profession + ')', [
-      'Nom : ' + nom,
-      'Profession : ' + profession,
-      'Téléphone : ' + tel,
-      'Date souhaitée : ' + date,
-      'Heure souhaitée : ' + heure,
-      'Motif : ' + motif
-    ]);
-    closeSidePanel();
-    showModal('🏥', 'Votre messagerie va s\'ouvrir', 'Un email pré-rempli avec votre demande va s\'ouvrir dans votre application mail. Il ne vous reste plus qu\'à l\'envoyer, je vous rappelle dans les 30 minutes pour confirmer la prise en charge.');
+    var btn = document.getElementById('btn-book-pro');
+    btn.disabled = true; btn.textContent = 'Envoi en cours…';
+    submitNetlifyForm('demande-pro', {
+      nom: nom, profession: profession, telephone: tel, date: date, heure: heure, motif: motif
+    }).then(function(res) {
+      btn.disabled = false; btn.textContent = 'Envoyer la demande';
+      if (res.ok) {
+        closeSidePanel();
+        showModal('🏥', 'Demande envoyée !', 'Votre demande a bien été transmise à ' + CONTACT_EMAIL + '. Je vous rappelle dans les 30 minutes pour confirmer la prise en charge.');
+      } else {
+        showModal('⚠️', 'Erreur', 'Une erreur est survenue. Merci de m\'appeler directement au 06.47.18.88.40.');
+      }
+    }).catch(function() {
+      btn.disabled = false; btn.textContent = 'Envoyer la demande';
+      showModal('⚠️', 'Erreur réseau', 'Impossible d\'envoyer la demande. Merci de m\'appeler directement au 06.47.18.88.40.');
+    });
   });
 
   // Date min
