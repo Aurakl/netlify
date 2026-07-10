@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Jordan Gandrey — Infirmier en Santé Mentale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<!-- Cal.com -->
+<script type="text/javascript">
+(function(C,A,L){let p=function(a,ar){a.q.push(ar);};let d=C.document;C.Cal=C.Cal||function(){let cal=C.Cal;let ar=arguments;if(!cal.loaded){cal.ns={};cal.q=cal.q||[];d.head.appendChild(d.createElement("script")).src=A;cal.loaded=true;}if(ar[0]===L){const api=function(){p(api,arguments);};const namespace=ar[1];api.q=api.q||[];if(typeof namespace==="string"){cal.ns[namespace]=cal.ns[namespace]||api;p(cal.ns[namespace],ar);p(cal,["-",namespace,api]);}else{p(cal,ar);}return;}p(cal,ar);};})(window,"https://app.cal.com/embed/embed.js","init");
+Cal("init", {origin:"https://cal.com"});
+</script>
+<style>
+:root{
+  --ink:#1a1410;--ink-mid:#4a3c34;--ink-light:#8a7a72;
+  --paper:#faf7f3;--paper-warm:#f5f0e8;
+  --clay:#c07a5a;--clay-dark:#9a5c3e;--clay-light:#d4957a;
+  --moss:#6b8f78;--moss-light:#9dbfac;--dusk:#8a9ab8;
+  --sand:#e8ddd0;--shadow:rgba(30,20,10,.10);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--paper);color:var(--ink);overflow-x:hidden;}
+
+/* LOADER */
+#loader{position:fixed;inset:0;z-index:10000;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;transition:opacity .6s,visibility .6s;}
+#loader.done{opacity:0;visibility:hidden;}
+.loader-logo{font-family:'Playfair Display',serif;font-size:2rem;color:#fff;letter-spacing:.08em;opacity:0;animation:fadeIn .8s .3s forwards;}
+.loader-logo span{color:var(--clay-light);}
+.loader-bar{width:180px;height:2px;background:rgba(255,255,255,.15);border-radius:2px;overflow:hidden;}
+.loader-fill{height:100%;width:0;background:var(--clay-light);animation:fillBar 1.6s .4s ease forwards;}
+.loader-sub{font-size:.78rem;color:rgba(255,255,255,.4);letter-spacing:.12em;text-transform:uppercase;opacity:0;animation:fadeIn .8s .6s forwards;}
+@keyframes fadeIn{to{opacity:1;}}
+@keyframes fillBar{to{width:100%;}}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:1.2rem 3rem;display:flex;align-items:center;justify-content:space-between;transition:background .3s,box-shadow .3s,padding .3s;}
+nav.scrolled{background:rgba(250,247,243,.95);backdrop-filter:blur(16px);box-shadow:0 1px 0 var(--sand);padding:.9rem 3rem;}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:500;color:var(--ink);text-decoration:none;letter-spacing:.02em;cursor:pointer;}
+.nav-logo em{font-style:italic;color:var(--clay);}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
+.nav-links a{font-size:.84rem;font-weight:400;color:var(--ink-mid);text-decoration:none;letter-spacing:.03em;position:relative;transition:color .2s;cursor:pointer;}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:var(--clay);transform:scaleX(0);transform-origin:right;transition:transform .3s;}
+.nav-links a:hover{color:var(--clay);}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1);transform-origin:left;}
+.nav-links a.active{color:var(--clay);}
+.nav-pill{background:var(--clay)!important;color:#fff!important;padding:.5rem 1.4rem;border-radius:50px;font-weight:500!important;box-shadow:0 4px 16px rgba(192,120,90,.3);}
+.nav-pill:hover{background:var(--clay-dark)!important;}
+.nav-pill::after{display:none!important;}
+.nav-badge{display:inline-flex;align-items:center;gap:.35rem;background:rgba(107,143,120,.12);border:1px solid rgba(107,143,120,.25);color:var(--moss);padding:.28rem .7rem;border-radius:50px;font-size:.72rem;font-weight:500;letter-spacing:.04em;}
+.nav-badge::before{content:'';width:6px;height:6px;background:var(--moss);border-radius:50%;animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:.4rem;z-index:600;position:relative;}
+.hamburger span{display:block;width:24px;height:1.5px;background:var(--ink);transition:all .3s;}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+/* PAGES */
+.page{display:none;}
+.page.active{display:block;}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .7s,transform .7s;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-left{opacity:0;transform:translateX(-36px);transition:opacity .7s,transform .7s;}
+.reveal-left.visible{opacity:1;transform:translateX(0);}
+.reveal-right{opacity:0;transform:translateX(36px);transition:opacity .7s,transform .7s;}
+.reveal-right.visible{opacity:1;transform:translateX(0);}
+.reveal-delay-1{transition-delay:.1s;}.reveal-delay-2{transition-delay:.2s;}.reveal-delay-3{transition-delay:.3s;}.reveal-delay-4{transition-delay:.4s;}
+
+/* HERO */
+#hero-section{min-height:100vh;display:flex;align-items:center;padding:8rem 3rem 4rem;position:relative;overflow:hidden;}
+.hero-orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;}
+.hero-orb-1{width:600px;height:600px;right:-100px;top:-100px;background:radial-gradient(circle,rgba(192,120,90,.12) 0%,transparent 70%);}
+.hero-orb-2{width:400px;height:400px;left:-80px;bottom:-80px;background:radial-gradient(circle,rgba(107,143,120,.10) 0%,transparent 70%);}
+.hero-inner{position:relative;z-index:1;max-width:1100px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr .9fr;gap:6rem;align-items:center;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:.6rem;font-size:.75rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--clay);margin-bottom:2rem;opacity:0;animation:slideUp .7s .2s forwards;}
+.hero-eyebrow::before{content:'';width:32px;height:1px;background:var(--clay);}
+.hero-h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,5vw,4.4rem);font-weight:400;line-height:1.1;opacity:0;animation:slideUp .7s .35s forwards;}
+.hero-h1 em{font-style:italic;color:var(--clay);}
+.hero-desc{margin-top:1.6rem;font-size:1.02rem;font-weight:300;color:var(--ink-mid);line-height:1.9;max-width:460px;opacity:0;animation:slideUp .7s .5s forwards;}
+.hero-actions{margin-top:2.4rem;display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:slideUp .7s .65s forwards;}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 2rem;border-radius:50px;font-family:'Outfit',sans-serif;font-size:.92rem;font-weight:500;text-decoration:none;border:none;cursor:pointer;transition:all .25s;}
+.btn-fill{background:var(--clay);color:#fff;box-shadow:0 4px 20px rgba(192,120,90,.3);}
+.btn-fill:hover{background:var(--clay-dark);transform:translateY(-2px);}
+.btn-outline{background:transparent;color:var(--ink-mid);border:1.5px solid var(--sand);}
+.btn-outline:hover{border-color:var(--clay-light);color:var(--clay);}
+.hero-stats{margin-top:3.5rem;display:flex;gap:3rem;opacity:0;animation:slideUp .7s .8s forwards;}
+.hero-stat-num{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:500;color:var(--clay);line-height:1;}
+.hero-stat-label{font-size:.75rem;color:var(--ink-light);letter-spacing:.04em;margin-top:.3rem;}
+.hero-right{opacity:0;animation:slideIn .8s .4s forwards;}
+.hero-card{background:var(--paper-warm);border:1px solid var(--sand);border-radius:32px;padding:2.5rem;box-shadow:0 20px 60px var(--shadow);position:relative;overflow:hidden;}
+.hero-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--clay),var(--moss-light),var(--dusk));}
+.hero-card-avatar{width:72px;height:72px;background:linear-gradient(135deg,var(--clay-light),var(--clay));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;margin-bottom:1.4rem;}
+.hero-card-name{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:500;margin-bottom:.2rem;}
+.hero-card-title{font-size:.82rem;color:var(--moss);font-weight:500;letter-spacing:.04em;margin-bottom:1.4rem;}
+.hero-card-tags{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1.6rem;}
+.tag{background:rgba(192,120,90,.08);border:1px solid rgba(192,120,90,.18);color:var(--clay-dark);padding:.32rem .8rem;border-radius:50px;font-size:.74rem;font-weight:500;}
+.tag.moss{background:rgba(107,143,120,.08);border-color:rgba(107,143,120,.2);color:var(--moss);}
+.tag.dusk{background:rgba(138,154,184,.08);border-color:rgba(138,154,184,.2);color:var(--dusk);}
+.hero-card-avail{display:flex;align-items:center;gap:.7rem;padding:1rem 1.2rem;background:rgba(107,143,120,.08);border-radius:14px;border:1px solid rgba(107,143,120,.18);}
+.avail-dot{width:8px;height:8px;background:var(--moss);border-radius:50%;animation:blink 2s infinite;flex-shrink:0;}
+.avail-text{font-size:.82rem;color:var(--moss);}
+.avail-text strong{font-weight:600;}
+@keyframes slideUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+@keyframes slideIn{from{opacity:0;transform:translateX(32px);}to{opacity:1;transform:translateX(0);}}
+
+/* SECTIONS */
+.section{padding:6rem 3rem;}
+.section-inner{max-width:1100px;margin:0 auto;}
+.section-eyebrow{display:inline-flex;align-items:center;gap:.6rem;font-size:.72rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--moss);margin-bottom:.9rem;}
+.section-eyebrow::before{content:'';width:28px;height:1px;background:var(--moss);}
+.section-h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,2.9rem);font-weight:400;line-height:1.2;}
+.section-h2 em{font-style:italic;color:var(--clay);}
+.section-desc{margin-top:.9rem;font-size:.98rem;font-weight:300;color:var(--ink-mid);line-height:1.85;max-width:520px;}
+
+/* COUNTERS */
+#counters-section{background:var(--ink);}
+.counters-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;text-align:center;}
+.counter-num{font-family:'Playfair Display',serif;font-size:3rem;font-weight:500;color:var(--clay-light);line-height:1;}
+.counter-suffix{font-size:1.5rem;}
+.counter-label{font-size:.8rem;color:rgba(255,255,255,.45);letter-spacing:.06em;text-transform:uppercase;margin-top:.6rem;}
+
+/* ABOUT */
+#about-section{background:var(--paper-warm);}
+.about-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:5rem;align-items:center;}
+.about-blob{width:100%;aspect-ratio:4/5;background:linear-gradient(145deg,var(--sand) 0%,rgba(192,120,90,.15) 100%);border-radius:40% 60% 55% 45%/45% 50% 50% 55%;display:flex;align-items:center;justify-content:center;font-size:6rem;animation:morphBlob 12s ease-in-out infinite;position:relative;}
+@keyframes morphBlob{0%,100%{border-radius:40% 60% 55% 45%/45% 50% 50% 55%;}50%{border-radius:55% 45% 42% 58%/50% 44% 56% 50%;}}
+.about-float-badge{position:absolute;bottom:1.5rem;right:-1.5rem;background:var(--clay);color:#fff;padding:.9rem 1.3rem;border-radius:18px;font-size:.78rem;font-weight:500;line-height:1.5;box-shadow:0 10px 30px rgba(192,120,90,.35);}
+.about-float-stat{position:absolute;top:2rem;left:-1.5rem;background:var(--paper);color:var(--ink);padding:.8rem 1.2rem;border-radius:16px;font-size:.75rem;line-height:1.5;box-shadow:0 8px 24px var(--shadow);border:1px solid var(--sand);}
+.about-float-stat strong{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:500;color:var(--clay);display:block;}
+.about-text p{font-size:.96rem;font-weight:300;color:var(--ink-mid);line-height:1.9;margin-bottom:1rem;}
+.about-text p strong{color:var(--ink);font-weight:500;}
+.about-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.5rem;}
+
+/* APPROACH */
+.approche-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3.5rem;}
+.approche-card{background:var(--paper-warm);border:1px solid var(--sand);border-radius:24px;padding:2.2rem;position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s;}
+.approche-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--clay),var(--moss-light));transform:scaleX(0);transform-origin:left;transition:transform .3s;}
+.approche-card:hover{transform:translateY(-6px);box-shadow:0 16px 48px var(--shadow);}
+.approche-card:hover::after{transform:scaleX(1);}
+.approche-num{font-family:'Playfair Display',serif;font-size:3.5rem;font-weight:700;color:rgba(192,120,90,.12);position:absolute;top:1.2rem;right:1.5rem;line-height:1;}
+.approche-icon{font-size:2rem;margin-bottom:1rem;}
+.approche-card h3{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:500;margin-bottom:.6rem;}
+.approche-card p{font-size:.86rem;color:var(--ink-mid);line-height:1.78;font-weight:300;}
+
+/* SERVICES */
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-top:3.5rem;}
+.service-card{background:var(--paper);border:1px solid var(--sand);border-radius:22px;padding:2rem;transition:transform .3s,box-shadow .3s;position:relative;overflow:hidden;}
+.service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--clay),var(--dusk));opacity:0;transition:opacity .3s;}
+.service-card:hover{transform:translateY(-5px);box-shadow:0 14px 40px var(--shadow);}
+.service-card:hover::before{opacity:1;}
+.service-card .ico{font-size:2.2rem;margin-bottom:1rem;}
+.service-card h3{font-family:'Playfair Display',serif;font-size:1.18rem;font-weight:500;margin-bottom:.5rem;}
+.service-card p{font-size:.84rem;color:var(--ink-mid);line-height:1.75;font-weight:300;}
+.service-label{display:inline-block;margin-top:.9rem;background:rgba(138,154,184,.1);border:1px solid rgba(138,154,184,.2);color:var(--dusk);padding:.28rem .75rem;border-radius:50px;font-size:.72rem;font-weight:500;}
+
+/* ZONE */
+.zone-box{background:var(--paper-warm);border:1px solid var(--sand);border-radius:24px;padding:2.8rem;max-width:680px;margin:3rem auto 0;}
+.zone-box-header{display:flex;align-items:center;gap:.8rem;margin-bottom:1.5rem;font-size:.82rem;color:var(--ink-mid);}
+.zone-cantons{display:flex;flex-direction:column;gap:1rem;margin-top:1.5rem;}
+.zone-canton{display:flex;align-items:center;gap:1rem;padding:1rem 1.2rem;background:var(--paper);border:1px solid var(--sand);border-radius:14px;}
+.zone-canton-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.zone-canton-dot.vaud{background:var(--clay);}
+.zone-canton-dot.neuchatel{background:var(--moss);}
+.zone-canton-name{font-family:'Playfair Display',serif;font-size:1rem;font-weight:500;}
+.zone-canton-desc{font-size:.78rem;color:var(--ink-light);margin-top:.1rem;}
+
+/* TEMOIGNAGES */
+.temoignages-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem;}
+.temoignage-card{background:var(--paper);border:1px solid var(--sand);border-radius:22px;padding:2rem;position:relative;}
+.temoignage-card::before{content:'"';font-family:'Playfair Display',serif;font-size:5rem;color:rgba(192,120,90,.15);position:absolute;top:.5rem;right:1.5rem;line-height:1;}
+.temo-stars{color:var(--clay);font-size:1rem;margin-bottom:1rem;letter-spacing:.1em;}
+.temo-text{font-size:.9rem;color:var(--ink-mid);line-height:1.85;font-weight:300;font-style:italic;}
+.temo-author{margin-top:1.2rem;display:flex;align-items:center;gap:.8rem;}
+.temo-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--sand),rgba(192,120,90,.3));display:flex;align-items:center;justify-content:center;font-size:1rem;}
+.temo-name{font-size:.82rem;font-weight:500;color:var(--ink);}
+.temo-detail{font-size:.74rem;color:var(--ink-light);}
+
+/* FAQ */
+.faq-list{max-width:720px;margin:3rem auto 0;display:flex;flex-direction:column;gap:.8rem;}
+.faq-item{background:var(--paper-warm);border:1px solid var(--sand);border-radius:16px;overflow:hidden;}
+.faq-question{width:100%;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 1.5rem;background:none;border:none;font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:500;color:var(--ink);text-align:left;cursor:pointer;gap:1rem;}
+.faq-arrow{width:28px;height:28px;flex-shrink:0;background:rgba(192,120,90,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .3s,background .2s;font-size:.75rem;color:var(--clay);}
+.faq-item.open .faq-arrow{transform:rotate(180deg);background:var(--clay);color:#fff;}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height .4s ease;}
+.faq-answer-inner{padding:0 1.5rem 1.2rem;font-size:.88rem;color:var(--ink-mid);line-height:1.85;font-weight:300;}
+.faq-item.open .faq-answer{max-height:300px;}
+
+/* CONTACT */
+#contact-section{background:var(--paper-warm);}
+.contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:4rem;align-items:start;}
+.contact-info h3{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:400;margin-bottom:1.8rem;}
+.contact-item{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.3rem;}
+.contact-icon{width:44px;height:44px;flex-shrink:0;background:rgba(192,120,90,.08);border:1px solid rgba(192,120,90,.15);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+.contact-label{font-size:.74rem;color:var(--ink-light);letter-spacing:.05em;text-transform:uppercase;}
+.contact-val{font-size:.94rem;color:var(--ink);margin-top:.15rem;}
+.contact-val a{color:inherit;text-decoration:none;border-bottom:1px dotted var(--ink-light);transition:color .2s,border-color .2s;}
+.contact-val a:hover{color:var(--clay);border-color:var(--clay);}
+.contact-form-wrap{background:var(--paper);border:1px solid var(--sand);border-radius:26px;padding:2.5rem;box-shadow:0 8px 32px var(--shadow);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin-bottom:.9rem;}
+.form-group{display:flex;flex-direction:column;gap:.38rem;}
+.form-group label{font-size:.76rem;font-weight:500;color:var(--ink-mid);}
+.form-group input,.form-group textarea{background:var(--paper-warm);border:1.5px solid var(--sand);border-radius:11px;padding:.72rem .95rem;font-family:'Outfit',sans-serif;font-size:.88rem;color:var(--ink);outline:none;transition:border-color .2s,box-shadow .2s;}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--clay-light);box-shadow:0 0 0 3px rgba(192,120,90,.08);}
+.form-group textarea{resize:vertical;min-height:100px;}
+.form-full{grid-column:1/-1;}
+.form-submit{width:100%;padding:.95rem;margin-top:.5rem;background:var(--clay);color:#fff;border:none;border-radius:14px;font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:500;cursor:pointer;transition:all .25s;box-shadow:0 4px 18px rgba(192,120,90,.3);}
+.form-submit:hover{background:var(--clay-dark);transform:translateY(-2px);}
+
+/* RDV CAL.COM */
+#rdv-section{background:var(--paper);}
+#cal-inline-widget{width:100%;min-height:600px;border-radius:20px;overflow:hidden;border:1px solid var(--sand);box-shadow:0 8px 40px var(--shadow);}
+
+/* SIDE PANEL */
+.side-trigger{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:200;background:var(--clay);color:#fff;writing-mode:vertical-rl;padding:1.2rem .8rem;border-radius:12px 0 0 12px;font-family:'Outfit',sans-serif;font-size:.78rem;font-weight:500;letter-spacing:.06em;cursor:pointer;border:none;box-shadow:-3px 0 24px rgba(192,120,90,.3);transition:background .2s,padding .2s;display:flex;align-items:center;gap:.5rem;}
+.side-trigger:hover{background:var(--clay-dark);}
+.side-overlay{position:fixed;inset:0;z-index:300;background:rgba(26,20,16,.45);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .3s;}
+.side-overlay.open{opacity:1;pointer-events:all;}
+.side-panel{position:fixed;right:0;top:0;bottom:0;width:380px;max-width:95vw;background:var(--paper-warm);z-index:301;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);overflow-y:auto;box-shadow:-6px 0 50px rgba(26,20,16,.15);display:flex;flex-direction:column;}
+.side-panel.open{transform:translateX(0);}
+.side-panel-header{padding:1.5rem 1.5rem 1rem;border-bottom:1px solid var(--sand);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--paper-warm);z-index:1;}
+.side-panel-header h3{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:400;}
+.side-panel-close{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--sand);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--ink-mid);transition:background .2s;}
+.side-panel-close:hover{background:var(--sand);}
+.side-panel-body{padding:1.3rem 1.5rem 2rem;flex:1;}
+.side-tabs{display:flex;gap:.5rem;margin-bottom:1.2rem;}
+.side-tab{flex:1;padding:.55rem .5rem;border-radius:50px;border:1.5px solid var(--sand);background:transparent;color:var(--ink-mid);font-family:'Outfit',sans-serif;font-size:.78rem;cursor:pointer;transition:all .2s;text-align:center;}
+.side-tab.active{background:var(--clay);border-color:var(--clay);color:#fff;font-weight:500;}
+.side-form-group{display:flex;flex-direction:column;gap:.35rem;margin-bottom:.75rem;}
+.side-form-group label{font-size:.75rem;font-weight:500;color:var(--ink-mid);}
+.side-form-group input,.side-form-group select,.side-form-group textarea{background:var(--paper);border:1.5px solid var(--sand);border-radius:10px;padding:.62rem .85rem;font-family:'Outfit',sans-serif;font-size:.84rem;color:var(--ink);outline:none;transition:border-color .2s;}
+.side-form-group input:focus,.side-form-group select:focus,.side-form-group textarea:focus{border-color:var(--clay-light);}
+.side-form-group textarea{resize:vertical;min-height:70px;}
+.side-note{padding:.7rem .85rem;margin-bottom:.85rem;background:rgba(107,143,120,.08);border-radius:10px;font-size:.74rem;color:var(--moss);line-height:1.6;border-left:3px solid var(--moss-light);}
+.side-submit{width:100%;padding:.85rem;background:var(--clay);color:#fff;border:none;border-radius:12px;font-family:'Outfit',sans-serif;font-size:.88rem;font-weight:500;cursor:pointer;transition:all .2s;box-shadow:0 4px 18px rgba(192,120,90,.28);}
+.side-submit:hover{background:var(--clay-dark);transform:translateY(-1px);}
+.side-form[hidden]{display:none;}
+.side-tel-block{margin-top:1.2rem;padding:1rem;background:rgba(192,120,90,.06);border-radius:12px;text-align:center;border:1px solid rgba(192,120,90,.15);}
+.side-tel-label{font-size:.72rem;color:var(--ink-light);letter-spacing:.05em;text-transform:uppercase;margin-bottom:.4rem;}
+.side-tel-block a{font-size:1rem;font-weight:600;color:var(--clay);text-decoration:none;display:block;}
+.side-tel-sub{font-size:.72rem;color:var(--ink-light);margin-top:.25rem;}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;z-index:999;background:rgba(26,20,16,.5);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal-box{background:var(--paper-warm);border-radius:28px;padding:2.5rem;max-width:400px;width:90%;text-align:center;transform:translateY(24px) scale(.97);transition:transform .3s;box-shadow:0 24px 60px rgba(26,20,16,.2);border:1px solid var(--sand);}
+.modal-overlay.open .modal-box{transform:translateY(0) scale(1);}
+.modal-icon{font-size:2.8rem;margin-bottom:.9rem;}
+.modal-box h3{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:400;margin-bottom:.75rem;}
+.modal-box p{font-size:.88rem;color:var(--ink-mid);line-height:1.75;}
+.modal-close{margin-top:1.6rem;padding:.72rem 2.2rem;background:var(--clay);color:#fff;border:none;border-radius:50px;font-family:'Outfit',sans-serif;font-size:.9rem;font-weight:500;cursor:pointer;}
+
+/* FOOTER */
+footer{background:var(--ink);padding:3rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;}
+.footer-logo{font-family:'Playfair Display',serif;font-size:1.2rem;color:rgba(255,255,255,.85);}
+.footer-logo em{font-style:italic;color:var(--clay-light);}
+.footer-links{display:flex;gap:1.8rem;list-style:none;}
+.footer-links a{font-size:.8rem;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s;cursor:pointer;}
+.footer-links a:hover{color:var(--clay-light);}
+.footer-legal{font-size:.74rem;color:rgba(255,255,255,.3);}
+
+.rdv-type-btn{padding:.7rem 1.6rem;border-radius:50px;border:1.5px solid var(--sand);background:transparent;color:var(--ink-mid);font-family:'Outfit',sans-serif;font-size:.88rem;font-weight:400;cursor:pointer;transition:all .2s;}
+.rdv-type-btn.active{background:var(--clay);border-color:var(--clay);color:#fff;font-weight:500;box-shadow:0 4px 16px rgba(192,120,90,.3);}
+.rdv-type-btn:not(.active):hover{border-color:var(--clay-light);color:var(--clay);}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .hero-inner{grid-template-columns:1fr;gap:3rem;}
+  .hero-right{display:none;}
+  .about-grid{grid-template-columns:1fr;gap:3rem;}
+  .counters-grid{grid-template-columns:repeat(2,1fr);}
+  .contact-grid{grid-template-columns:1fr;}
+  .temoignages-grid{grid-template-columns:1fr;}
+}
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem;}
+  .nav-links{display:none;flex-direction:column;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--paper);z-index:500;align-items:center;justify-content:center;gap:0;}
+  .nav-links.open{display:flex;}
+  .nav-links li{width:100%;text-align:center;}
+  .nav-links a{display:block;padding:1rem;font-size:1.1rem;border-bottom:1px solid var(--sand);}
+  .nav-links a.nav-pill{margin:1rem auto;width:fit-content;display:inline-flex;border-bottom:none;}
+  .nav-badge{display:none;}
+  .hamburger{display:flex;}
+  .section{padding:4rem 1.4rem;}
+  .approche-grid,.services-grid{grid-template-columns:1fr;}
+  .hero-stats{gap:1.8rem;}
+  #hero-section{padding:7rem 1.4rem 3rem;}
+  .form-row{grid-template-columns:1fr;}
+  footer{flex-direction:column;text-align:center;padding-bottom:6rem;}
+  .footer-links{justify-content:center;flex-wrap:wrap;}
+  .side-trigger{writing-mode:horizontal-tb;transform:none;top:auto;bottom:1.2rem;left:50%;transform:translateX(-50%);border-radius:50px;padding:.75rem 1.6rem;font-size:.82rem;box-shadow:0 4px 20px rgba(192,120,90,.4);white-space:nowrap;}
+  .side-panel{top:64px;}
+  .counters-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:480px){
+  .hero-actions{flex-direction:column;}
+  .btn{justify-content:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-logo">Jordan <span>Gandrey</span></div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+  <div class="loader-sub">Infirmier en santé mentale</div>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a class="nav-logo" data-page="home"><em>J.</em>Gandrey</a>
+  <ul class="nav-links" id="nav-links">
+    <li><a data-page="about">À propos</a></li>
+    <li><a data-page="approche">Mon approche</a></li>
+    <li><a data-page="services">Soins</a></li>
+    <li><a data-page="contact">Contact</a></li>
+    <li><span class="nav-badge" id="nav-badge">Disponible</span></li>
+    <li><a data-page="rdv" class="nav-pill">📅 Prendre RDV</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- BOUTON FLOTTANT -->
+<button class="side-trigger" id="btn-side-trigger">📅 Demande de suivi</button>
+
+<!-- OVERLAY -->
+<div class="side-overlay" id="side-overlay"></div>
+
+<!-- SIDE PANEL -->
+<div class="side-panel" id="side-panel">
+  <div class="side-panel-header">
+    <h3>Demande de suivi</h3>
+    <button class="side-panel-close" id="btn-side-close">✕</button>
+  </div>
+  <div class="side-panel-body">
+    <div class="side-tabs">
+      <button class="side-tab active" id="stab-patient">👤 Patient</button>
+      <button class="side-tab" id="stab-pro">🏥 Pro de santé</button>
+    </div>
+    <!-- FORM PATIENT -->
+    <div class="side-form" id="side-form-patient">
+      <div class="side-form-group"><label>Prénom &amp; Nom *</label><input type="text" id="s-nom" placeholder="Prénom Nom"/></div>
+      <div class="side-form-group"><label>Téléphone *</label><input type="tel" id="s-tel" placeholder="07 XX XX XX XX"/></div>
+      <div class="side-form-group"><label>Date souhaitée *</label><input type="date" id="s-date"/></div>
+      <div class="side-form-group"><label>Heure * (09h–17h)</label><input type="time" id="s-heure" min="09:00" max="17:00"/></div>
+      <div class="side-form-group"><label>Type de soin *</label>
+        <select id="s-soin">
+          <option value="">Sélectionner...</option>
+          <option>Entretien infirmier / soutien</option>
+          <option>Préparation du pilulier</option>
+          <option>Injection retard (neuroleptique)</option>
+          <option>Surveillance &amp; étayage psychiatrique</option>
+          <option>Entretien motivationnel</option>
+          <option>Autre / première prise de contact</option>
+        </select>
+      </div>
+      <div class="side-form-group"><label>Adresse *</label><input type="text" id="s-adresse" placeholder="Rue, ville, NPA"/></div>
+      <div class="side-note">✉️ Un email avec votre demande sera préparé dans votre messagerie.</div>
+      <button class="side-submit" id="btn-book-patient">Confirmer le rendez-vous</button>
+      <div class="side-tel-block">
+        <div class="side-tel-label">Besoin d'aide ?</div>
+        <a href="tel:+33647188840">📞 06.47.18.88.40</a>
+        <div class="side-tel-sub">Contactez-moi directement</div>
+      </div>
+    </div>
+    <!-- FORM PRO -->
+    <div class="side-form" id="side-form-pro" hidden>
+      <div class="side-form-group"><label>Prénom &amp; Nom *</label><input type="text" id="sp-nom" placeholder="Prénom Nom"/></div>
+      <div class="side-form-group"><label>Profession *</label>
+        <select id="sp-profession">
+          <option value="">Sélectionner...</option>
+          <option>Psychiatre</option>
+          <option>Médecin généraliste</option>
+          <option>Infirmier(e) CMS</option>
+          <option>Psychologue FSP</option>
+          <option>Assistant(e) social(e)</option>
+          <option>Équipe mobile psychiatrique</option>
+          <option>Autre</option>
+        </select>
+      </div>
+      <div class="side-form-group"><label>Téléphone *</label><input type="tel" id="sp-tel" placeholder="07 XX XX XX XX"/></div>
+      <div class="side-form-group"><label>Date souhaitée *</label><input type="date" id="sp-date"/></div>
+      <div class="side-form-group"><label>Heure * (09h–17h)</label><input type="time" id="sp-heure" min="09:00" max="17:00"/></div>
+      <div class="side-form-group"><label>Motif *</label>
+        <select id="sp-motif">
+          <option value="">Sélectionner...</option>
+          <option>Demande de suivi pour un patient</option>
+          <option>Coordination de soins</option>
+          <option>Relais post-hospitalisation</option>
+          <option>Réunion de synthèse / staff</option>
+          <option>Autre</option>
+        </select>
+      </div>
+      <div class="side-note">🏥 Un email avec votre demande sera préparé dans votre messagerie.</div>
+      <button class="side-submit" id="btn-book-pro">Envoyer la demande</button>
+      <div class="side-tel-block">
+        <div class="side-tel-label">Besoin d'aide ?</div>
+        <a href="tel:+33647188840">📞 06.47.18.88.40</a>
+        <div class="side-tel-sub">Contactez-moi directement</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PAGE HOME ══ -->
+<div class="page active" id="page-home">
+  <section id="hero-section">
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-eyebrow">Infirmier en santé mentale — Vaud &amp; Neuchâtel</div>
+        <h1 class="hero-h1">Prendre soin,<br>dans toute votre<br><em>singularité.</em></h1>
+        <p class="hero-desc">Un accompagnement infirmier en psychiatrie, à domicile, ancré dans l'écoute et le respect de votre histoire de vie. Reconnu LAMal.</p>
+        <div class="hero-actions">
+          <button class="btn btn-fill" data-page="rdv">📅 Prendre rendez-vous</button>
+          <button class="btn btn-outline" data-page="about">Découvrir mon approche</button>
+        </div>
+        <div class="hero-stats">
+          <div><div class="hero-stat-num"><span class="counter" data-target="9">0</span>+</div><div class="hero-stat-label">Ans d'expérience</div></div>
+          <div><div class="hero-stat-num"><span class="counter" data-target="7">0</span>j/7</div><div class="hero-stat-label">Disponibilité</div></div>
+          <div><div class="hero-stat-num">LAMal</div><div class="hero-stat-label">Reconnu assurances</div></div>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-card">
+          <div class="hero-card-avatar">🧠</div>
+          <div class="hero-card-name">Jordan Gandrey</div>
+          <div class="hero-card-title">Infirmier HES · Santé Mentale</div>
+          <div class="hero-card-tags">
+            <span class="tag">Psychiatrie adulte</span>
+            <span class="tag moss">Suivi à domicile</span>
+            <span class="tag dusk">VD &amp; NE</span>
+          </div>
+          <div class="hero-card-avail">
+            <div class="avail-dot"></div>
+            <div class="avail-text"><strong id="avail-text">Disponible aujourd'hui</strong><br>Réponse sous 30 minutes</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="counters-section" class="section">
+    <div class="section-inner">
+      <div class="counters-grid">
+        <div class="reveal"><div class="counter-num"><span class="counter" data-target="9">0</span><span class="counter-suffix">+</span></div><div class="counter-label">Ans d'expérience</div></div>
+        <div class="reveal reveal-delay-1"><div class="counter-num"><span class="counter" data-target="2">0</span></div><div class="counter-label">Cantons couverts</div></div>
+        <div class="reveal reveal-delay-2"><div class="counter-num"><span class="counter" data-target="7">0</span><span class="counter-suffix">j/7</span></div><div class="counter-label">Disponibilité</div></div>
+        <div class="reveal reveal-delay-3"><div class="counter-num"><span class="counter" data-target="30">0</span><span class="counter-suffix">'</span></div><div class="counter-label">Délai de réponse</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--paper-warm)">
+    <div class="section-inner">
+      <div class="reveal" style="text-align:center;margin-bottom:3rem">
+        <div class="section-eyebrow" style="justify-content:center">Témoignages</div>
+        <h2 class="section-h2">Ce que disent<br><em>mes patients</em></h2>
+        <p class="section-desc" style="margin:0 auto">Témoignages anonymisés, partagés avec accord.</p>
+      </div>
+      <div class="temoignages-grid">
+        <div class="temoignage-card reveal reveal-delay-1">
+          <div class="temo-stars">★★★★★</div>
+          <p class="temo-text">Jordan a su créer une relation de confiance dès la première visite. Son écoute bienveillante et sa disponibilité ont vraiment changé mon quotidien.</p>
+          <div class="temo-author"><div class="temo-avatar">👤</div><div><div class="temo-name">Patient anonyme</div><div class="temo-detail">Suivi depuis 18 mois · Canton de Vaud</div></div></div>
+        </div>
+        <div class="temoignage-card reveal reveal-delay-2">
+          <div class="temo-stars">★★★★★</div>
+          <p class="temo-text">En tant que médecin traitant, j'apprécie la qualité des transmissions et la rigueur clinique de Jordan. La coordination est fluide et le patient est vraiment au centre.</p>
+          <div class="temo-author"><div class="temo-avatar">🩺</div><div><div class="temo-name">Médecin généraliste</div><div class="temo-detail">Partenaire professionnel · Neuchâtel</div></div></div>
+        </div>
+        <div class="temoignage-card reveal reveal-delay-3">
+          <div class="temo-stars">★★★★★</div>
+          <p class="temo-text">Mon frère est suivi par Jordan depuis sa sortie d'hospitalisation. La transition a été tellement plus douce. Jordan a pris le temps d'expliquer chaque étape à toute la famille.</p>
+          <div class="temo-author"><div class="temo-avatar">👥</div><div><div class="temo-name">Proche aidant</div><div class="temo-detail">Accompagnement familial · Canton de Vaud</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--paper)">
+    <div class="section-inner">
+      <div class="reveal" style="text-align:center;margin-bottom:0">
+        <div class="section-eyebrow" style="justify-content:center">Questions fréquentes</div>
+        <h2 class="section-h2">Tout ce que vous<br>voulez <em>savoir</em></h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item reveal"><button class="faq-question">Ai-je besoin d'une ordonnance ?<span class="faq-arrow">▼</span></button><div class="faq-answer"><div class="faq-answer-inner">Oui, en Suisse les soins infirmiers remboursés par LAMal nécessitent une ordonnance médicale. Je peux vous aider à l'obtenir en coordination avec votre médecin.</div></div></div>
+        <div class="faq-item reveal reveal-delay-1"><button class="faq-question">Quelles assurances prennent en charge vos soins ?<span class="faq-arrow">▼</span></button><div class="faq-answer"><div class="faq-answer-inner">Mes prestations sont reconnues LAMal. La prise en charge dépend de votre contrat et franchise. La plupart des assurances complémentaires couvrent également une part des soins.</div></div></div>
+        <div class="faq-item reveal reveal-delay-2"><button class="faq-question">Dans quels cantons intervenez-vous ?<span class="faq-arrow">▼</span></button><div class="faq-answer"><div class="faq-answer-inner">J'interviens dans tout le canton de Vaud et tout le canton de Neuchâtel, à domicile. Pour toute demande hors de ces cantons, contactez-moi directement.</div></div></div>
+        <div class="faq-item reveal reveal-delay-3"><button class="faq-question">Comment se passe la première prise en charge ?<span class="faq-arrow">▼</span></button><div class="faq-answer"><div class="faq-answer-inner">Nous commençons par un entretien d'évaluation à votre domicile, sans engagement. Cela me permet de comprendre votre situation et construire un plan de soins adapté.</div></div></div>
+        <div class="faq-item reveal reveal-delay-4"><button class="faq-question">Intervenez-vous en urgence ?<span class="faq-arrow">▼</span></button><div class="faq-answer"><div class="faq-answer-inner">Pour les urgences psychiatriques, contactez le 144 ou le 143 (La Main Tendue). Pour les demandes urgentes non-vitales, appelez-moi directement au 06.47.18.88.40.</div></div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══ PAGE ABOUT ══ -->
+<div class="page" id="page-about">
+  <section id="about-section" class="section" style="padding-top:8rem">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div style="position:relative" class="reveal-left">
+          <div class="about-blob">🧠
+            <div class="about-float-badge">✔ Infirmier HES<br>Reconnu LAMal</div>
+            <div class="about-float-stat"><strong class="counter" data-target="9">0</strong>ans en psychiatrie</div>
+          </div>
+        </div>
+        <div class="about-text reveal-right">
+          <div class="section-eyebrow">À propos</div>
+          <h2 class="section-h2">Bonjour,<br>je suis <em>Jordan.</em></h2>
+          <p style="margin-top:1.2rem">Infirmier diplômé HES avec près d'une décennie d'expérience en psychiatrie hospitalière et ambulatoire — en France et en Suisse — j'ai choisi l'exercice indépendant pour proposer un suivi de proximité, continu et véritablement centré sur la personne.</p>
+          <p>Ma pratique s'ancre dans une vision <strong>globale et sociale du soin</strong> : je m'intéresse autant à la personne qu'à son environnement, ses relations, son quotidien. La souffrance psychique ne s'entend pas en dehors de l'histoire de vie qui la contient.</p>
+          <p>Je travaille en lien étroit avec les équipes psychiatriques, les médecins traitants et les acteurs du territoire — parce qu'un soin digne se construit en réseau, pas en silo.</p>
+          <div class="about-chips">
+            <span class="tag">Psychiatrie adulte</span><span class="tag moss">Troubles bipolaires</span><span class="tag">Schizophrénie</span><span class="tag dusk">Dépression</span><span class="tag moss">Addictions</span><span class="tag">Suivi post-hospit.</span><span class="tag dusk">Coordination équipes</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══ PAGE APPROCHE ══ -->
+<div class="page" id="page-approche">
+  <section class="section" style="padding-top:8rem;background:var(--paper)">
+    <div class="section-inner">
+      <div class="reveal" style="text-align:center;max-width:600px;margin:0 auto 0">
+        <div class="section-eyebrow" style="justify-content:center">Philosophie de soin</div>
+        <h2 class="section-h2">Une approche<br><em>humaine</em> du soin</h2>
+        <p class="section-desc" style="margin:0 auto">Trois principes qui guident chacune de mes interventions.</p>
+      </div>
+      <div class="approche-grid">
+        <div class="approche-card reveal reveal-delay-1"><div class="approche-num">01</div><div class="approche-icon">🌱</div><h3>La personne avant le diagnostic</h3><p>Je soigne un individu avec son histoire, pas une pathologie. Chaque suivi est pensé dans le respect du rythme, des désirs et de l'autonomie de la personne.</p></div>
+        <div class="approche-card reveal reveal-delay-2"><div class="approche-num">02</div><div class="approche-icon">🔗</div><h3>Le soin comme lien</h3><p>La relation thérapeutique est au cœur de mon travail. Créer un espace de confiance, de continuité, dans lequel le patient peut se sentir existant et reconnu.</p></div>
+        <div class="approche-card reveal reveal-delay-3"><div class="approche-num">03</div><div class="approche-icon">🏘️</div><h3>S'inscrire dans un territoire</h3><p>Je collabore avec les équipes CMS, les services de psychiatrie ambulatoire, les médecins et les travailleurs sociaux. Le soin ne s'exerce pas en dehors du tissu collectif.</p></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══ PAGE SOINS ══ -->
+<div class="page" id="page-services">
+  <section class="section" style="padding-top:8rem;background:var(--paper-warm)">
+    <div class="section-inner">
+      <div class="reveal" style="text-align:center;max-width:600px;margin:0 auto">
+        <div class="section-eyebrow" style="justify-content:center">Actes infirmiers</div>
+        <h2 class="section-h2">Ce que je<br><em>propose</em></h2>
+        <p class="section-desc" style="margin:0 auto">Soins techniques et relationnels, à domicile ou en articulation avec votre équipe soignante.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card reveal reveal-delay-1"><div class="ico">🗣️</div><h3>Entretien infirmier</h3><p>Entretien de suivi, évaluation clinique et soutien psychologique. Écoute active, recueil de l'état mental, repérage des signes précurseurs.</p><span class="service-label">Acte relationnel</span></div>
+        <div class="service-card reveal reveal-delay-2"><div class="ico">🧭</div><h3>Entretien motivationnel</h3><p>Accompagnement au changement, travail sur l'ambivalence, soutien à l'observance thérapeutique. Technique validée, centrée sur l'autonomie.</p><span class="service-label">Approche centrée patient</span></div>
+        <div class="service-card reveal reveal-delay-3"><div class="ico">💊</div><h3>Préparation du pilulier</h3><p>Préparation hebdomadaire des médicaments, explication des traitements, surveillance de l'observance. Lien avec le médecin en cas d'anomalie.</p><span class="service-label">Acte technique</span></div>
+        <div class="service-card reveal reveal-delay-1"><div class="ico">💉</div><h3>Injections retard</h3><p>Administration d'antipsychotiques à action prolongée (AAP). Surveillance des effets indésirables, traçabilité, lien avec le prescripteur.</p><span class="service-label">Acte technique</span></div>
+        <div class="service-card reveal reveal-delay-2"><div class="ico">📋</div><h3>Surveillance &amp; étayage psy</h3><p>Évaluation régulière de l'état psychique, repérage des signes d'alerte, soutien dans les actes de la vie quotidienne. Prévention des rechutes.</p><span class="service-label">Suivi chronique</span></div>
+        <div class="service-card reveal reveal-delay-3"><div class="ico">🤝</div><h3>Coordination &amp; lien</h3><p>Articulation avec les CMS, le médecin traitant, les équipes mobiles et les acteurs sociaux. Transmissions cliniques structurées.</p><span class="service-label">Travail en réseau</span></div>
+      </div>
+      <div style="margin-top:5rem">
+        <div class="reveal" style="text-align:center;margin-bottom:0">
+          <div class="section-eyebrow" style="justify-content:center">Secteur d'intervention</div>
+          <h2 class="section-h2">Zone <em>d'exercice</em></h2>
+        </div>
+        <div class="zone-box reveal">
+          <div class="zone-box-header"><span>📍</span><span>Cantons de Vaud &amp; Neuchâtel — Suisse romande</span></div>
+          <p style="font-size:.95rem;color:var(--ink-mid);line-height:1.85;font-weight:300">J'interviens dans tout le <strong style="color:var(--clay)">canton de Vaud</strong> et tout le <strong style="color:var(--moss)">canton de Neuchâtel</strong>, à domicile. Contactez-moi directement pour organiser une première intervention.</p>
+          <div class="zone-cantons">
+            <div class="zone-canton"><div class="zone-canton-dot vaud"></div><div><div class="zone-canton-name">Canton de Vaud</div><div class="zone-canton-desc">Lausanne, Yverdon, Nyon, Morges, Vevey et toute la région</div></div></div>
+            <div class="zone-canton"><div class="zone-canton-dot neuchatel"></div><div><div class="zone-canton-name">Canton de Neuchâtel</div><div class="zone-canton-desc">Neuchâtel, La Chaux-de-Fonds, Le Locle et toute la région</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══ PAGE CONTACT ══ -->
+<div class="page" id="page-contact">
+  <section id="contact-section" class="section" style="padding-top:8rem">
+    <div class="section-inner">
+      <div class="reveal" style="text-align:center;max-width:560px;margin:0 auto 3.5rem">
+        <div class="section-eyebrow" style="justify-content:center">Me joindre</div>
+        <h2 class="section-h2">Restons en<br><em>contact</em></h2>
+      </div>
+      <div class="contact-grid">
+        <div class="reveal-left">
+          <h3 style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:400;margin-bottom:1.8rem">Informations pratiques</h3>
+          <div class="contact-item"><div class="contact-icon">📞</div><div><div class="contact-label">Téléphone</div><div class="contact-val"><a href="tel:+33647188840">06.47.18.88.40</a></div></div></div>
+          <div class="contact-item"><div class="contact-icon">✉️</div><div><div class="contact-label">Email</div><div class="contact-val"><a href="mailto:jordan.gandrey.pro@gmail.com">jordan.gandrey.pro@gmail.com</a></div></div></div>
+          <div class="contact-item"><div class="contact-icon">⏰</div><div><div class="contact-label">Disponibilités</div><div class="contact-val">Lun–Sam : 7h–20h · Dim : 8h–13h</div></div></div>
+          <div class="contact-item"><div class="contact-icon">🏥</div><div><div class="contact-label">Remboursement</div><div class="contact-val">Reconnu LAMal — Sur prescription médicale</div></div></div>
+          <div class="contact-item"><div class="contact-icon">🔗</div><div><div class="contact-label">Partenaires</div><div class="contact-val">CMS · Équipes mobiles psy · Hôpitaux psychiatriques</div></div></div>
+        </div>
+        <div class="reveal-right">
+          <div class="contact-form-wrap">
+            <form id="contact-form">
+              <div class="form-row">
+                <div class="form-group"><label>Prénom</label><input type="text" name="prenom" placeholder="Prénom" required/></div>
+                <div class="form-group"><label>Nom</label><input type="text" name="nom" placeholder="Nom" required/></div>
+              </div>
+              <div class="form-row">
+                <div class="form-group form-full"><label>Email ou téléphone</label><input type="text" name="contact" placeholder="contact@email.ch ou 07…" required/></div>
+              </div>
+              <div class="form-row">
+                <div class="form-group form-full"><label>Message</label><textarea name="message" placeholder="Question, demande d'information, coordination…" required></textarea></div>
+              </div>
+              <button type="button" class="form-submit" id="btn-contact-send">Envoyer le message</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══ PAGE RDV ══ -->
+<div class="page" id="page-rdv">
+  <section id="rdv-section" class="section" style="padding-top:8rem">
+    <div class="section-inner">
+      <div class="reveal" style="text-align:center;max-width:580px;margin:0 auto 3rem">
+        <div class="section-eyebrow" style="justify-content:center">Agenda en ligne</div>
+        <h2 class="section-h2">Prendre<br><em>rendez-vous</em></h2>
+        <p class="section-desc" style="margin:0 auto">Choisissez directement un créneau disponible. Vous recevrez une confirmation automatique par email.</p>
+      </div>
+      <div id="cal-inline-widget"></div>
+      <p style="text-align:center;margin-top:1.5rem;font-size:.82rem;color:var(--ink-light)">Un problème ? Appelez le <a href="tel:+33647188840" style="color:var(--clay);font-weight:500">06.47.18.88.40</a></p>
+    </div>
+  </section>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-box">
+    <div class="modal-icon" id="modal-icon">✉️</div>
+    <h3 id="modal-title"></h3>
+    <p id="modal-text"></p>
+    <button class="modal-close" id="modal-close-btn">Fermer</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo"><em>J.</em>Gandrey — Infirmier Indépendant</div>
+  <ul class="footer-links">
+    <li><a data-page="about">À propos</a></li>
+    <li><a data-page="approche">Approche</a></li>
+    <li><a data-page="services">Soins</a></li>
+    <li><a data-page="rdv">RDV</a></li>
+    <li><a data-page="contact">Contact</a></li>
+  </ul>
+  <div class="footer-legal">© 2025 · RCC : XXXXXXXXX · Vaud &amp; Neuchâtel</div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+  var CONTACT_EMAIL = 'jordan.gandrey.pro@gmail.com';
+
+  // ── NAVIGATION ──
+  function showPage(name) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    var target = document.getElementById('page-' + name);
+    if (target) { target.classList.add('active'); window.scrollTo({top:0,behavior:'smooth'}); }
+    document.querySelectorAll('[data-page]').forEach(function(el) {
+      el.classList.toggle('active', el.dataset.page === name);
+    });
+    setTimeout(function() { initReveal(); initCounters(); }, 100);
+    // Init Cal.com si page rdv
+    if (name === 'rdv') { initCal(); }
+  }
+
+  document.querySelectorAll('[data-page]').forEach(function(el) {
+    el.addEventListener('click', function(e) {
+      e.preventDefault();
+      showPage(this.dataset.page);
+      hamburger.classList.remove('open');
+      navLinks.classList.remove('open');
+    });
+  });
+
+  // ── CAL.COM ──
+  var currentCalLink = "jordan-gandrey/autre-rendez-vous";
+
+  function initCal(calLink) {
+    calLink = calLink || currentCalLink;
+    currentCalLink = calLink;
+    var widget = document.getElementById("cal-inline-widget");
+    if (!widget) return;
+    // Vider et recréer le widget
+    widget.innerHTML = "";
+    Cal("inline", {
+      elementOrSelector: "#cal-inline-widget",
+      calLink: calLink,
+      config: { layout: "month_view", theme: "light" }
+    });
+  }
+
+  // Boutons sélecteur de type RDV
+  document.querySelectorAll('.rdv-type-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.rdv-type-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      initCal("jordan-gandrey/" + btn.dataset.cal);
+    });
+  });
+
+  // ── LOADER ──
+  initReveal();
+  initCounters();
+  window.addEventListener('load', function() {
+    setTimeout(function() { document.getElementById('loader').classList.add('done'); }, 1800);
+  });
+
+  // ── NAV SCROLL ──
+  window.addEventListener('scroll', function() {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // ── HAMBURGER ──
+  var hamburger = document.getElementById('hamburger');
+  var navLinks = document.getElementById('nav-links');
+  hamburger.addEventListener('click', function() {
+    hamburger.classList.toggle('open');
+    navLinks.classList.toggle('open');
+  });
+
+  // ── DISPONIBILITÉ ──
+  function updateAvailability() {
+    var now = new Date();
+    var day = now.getDay(); var h = now.getHours();
+    var available = (day >= 1 && day <= 6 && h >= 7 && h < 20) || (day === 0 && h >= 8 && h < 13);
+    var badge = document.getElementById('nav-badge');
+    var availText = document.getElementById('avail-text');
+    if (badge) {
+      badge.textContent = available ? 'Disponible' : 'Absent';
+      badge.style.background = available ? 'rgba(107,143,120,.12)' : 'rgba(192,120,90,.10)';
+      badge.style.color = available ? 'var(--moss)' : 'var(--clay)';
+    }
+    if (availText) availText.textContent = available ? "Disponible aujourd'hui" : 'Indisponible ce créneau';
+  }
+  updateAvailability();
+
+  // ── REVEAL ──
+  function initReveal() {
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, {threshold: 0.12});
+    document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(function(el) { obs.observe(el); });
+  }
+
+  // ── COUNTERS ──
+  function initCounters() {
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting && !e.target.dataset.done) {
+          e.target.dataset.done = '1';
+          var target = parseInt(e.target.dataset.target);
+          var cur = 0; var step = Math.max(1, Math.ceil(target/40));
+          var t = setInterval(function() {
+            cur = Math.min(cur + step, target);
+            e.target.textContent = cur;
+            if (cur >= target) clearInterval(t);
+          }, 40);
+        }
+      });
+    }, {threshold: 0.3});
+    document.querySelectorAll('.counter[data-target]').forEach(function(el) { obs.observe(el); });
+  }
+
+  // ── FAQ ──
+  document.querySelectorAll('.faq-question').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = btn.closest('.faq-item');
+      var wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function(i) { i.classList.remove('open'); });
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+
+  // ── SIDE PANEL ──
+  function openSidePanel() {
+    document.getElementById('side-panel').classList.add('open');
+    document.getElementById('side-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeSidePanel() {
+    document.getElementById('side-panel').classList.remove('open');
+    document.getElementById('side-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('btn-side-trigger').addEventListener('click', openSidePanel);
+  document.getElementById('btn-side-close').addEventListener('click', closeSidePanel);
+  document.getElementById('side-overlay').addEventListener('click', closeSidePanel);
+  document.getElementById('stab-patient').addEventListener('click', function() {
+    document.getElementById('stab-patient').classList.add('active');
+    document.getElementById('stab-pro').classList.remove('active');
+    document.getElementById('side-form-patient').hidden = false;
+    document.getElementById('side-form-pro').hidden = true;
+  });
+  document.getElementById('stab-pro').addEventListener('click', function() {
+    document.getElementById('stab-pro').classList.add('active');
+    document.getElementById('stab-patient').classList.remove('active');
+    document.getElementById('side-form-patient').hidden = true;
+    document.getElementById('side-form-pro').hidden = false;
+  });
+
+  // ── OUVERTURE DE L'AGENT MAIL (mailto) ──
+  function openMailClient(subject, bodyLines) {
+    var mailtoLink = 'mailto:' + CONTACT_EMAIL +
+      '?subject=' + encodeURIComponent(subject) +
+      '&body=' + encodeURIComponent(bodyLines.join('\n'));
+    window.location.href = mailtoLink;
+  }
+
+  // ── SIDE PANEL RDV ──
+  document.getElementById('btn-book-patient').addEventListener('click', function() {
+    var nom = document.getElementById('s-nom').value.trim();
+    var tel = document.getElementById('s-tel').value.trim();
+    var date = document.getElementById('s-date').value;
+    var heure = document.getElementById('s-heure').value;
+    var soin = document.getElementById('s-soin').value;
+    var adresse = document.getElementById('s-adresse').value.trim();
+    if (!nom||!tel||!date||!heure||!soin||!adresse) { alert('Merci de remplir tous les champs (*).'); return; }
+    if (heure < '09:00' || heure > '17:00') { alert('Les rendez-vous sont possibles entre 09h et 17h.'); return; }
+    openMailClient('Demande de suivi — ' + nom, [
+      'Nom : ' + nom,
+      'Téléphone : ' + tel,
+      'Date souhaitée : ' + date,
+      'Heure souhaitée : ' + heure,
+      'Type de soin : ' + soin,
+      'Adresse : ' + adresse
+    ]);
+    closeSidePanel();
+    showModal('📅', 'Votre messagerie va s\'ouvrir', 'Un email pré-rempli avec votre demande va s\'ouvrir dans votre application mail. Il ne vous reste plus qu\'à l\'envoyer, je vous confirme le rendez-vous par téléphone sous 30 minutes.');
+  });
+
+  document.getElementById('btn-book-pro').addEventListener('click', function() {
+    var nom = document.getElementById('sp-nom').value.trim();
+    var profession = document.getElementById('sp-profession').value;
+    var tel = document.getElementById('sp-tel').value.trim();
+    var date = document.getElementById('sp-date').value;
+    var heure = document.getElementById('sp-heure').value;
+    var motif = document.getElementById('sp-motif').value;
+    if (!nom||!profession||!tel||!date||!heure||!motif) { alert('Merci de remplir tous les champs (*).'); return; }
+    if (heure < '09:00' || heure > '17:00') { alert('Les rendez-vous sont possibles entre 09h et 17h.'); return; }
+    openMailClient('Demande de coordination — ' + nom + ' (' + profession + ')', [
+      'Nom : ' + nom,
+      'Profession : ' + profession,
+      'Téléphone : ' + tel,
+      'Date souhaitée : ' + date,
+      'Heure souhaitée : ' + heure,
+      'Motif : ' + motif
+    ]);
+    closeSidePanel();
+    showModal('🏥', 'Votre messagerie va s\'ouvrir', 'Un email pré-rempli avec votre demande va s\'ouvrir dans votre application mail. Il ne vous reste plus qu\'à l\'envoyer, je vous rappelle dans les 30 minutes pour confirmer la prise en charge.');
+  });
+
+  // Date min
+  var today = new Date().toISOString().split('T')[0];
+  ['s-date','sp-date'].forEach(function(id) {
+    var el = document.getElementById(id); if (el) el.min = today;
+  });
+
+  // ── CONTACT FORM ──
+  document.getElementById('btn-contact-send').addEventListener('click', function() {
+    var form = document.getElementById('contact-form');
+    var prenom = form.querySelector('[name="prenom"]').value.trim();
+    var nom = form.querySelector('[name="nom"]').value.trim();
+    var contact = form.querySelector('[name="contact"]').value.trim();
+    var message = form.querySelector('[name="message"]').value.trim();
+    if (!prenom||!nom||!contact||!message) { alert('Merci de remplir tous les champs.'); return; }
+    openMailClient('Message depuis le site — ' + prenom + ' ' + nom, [
+      'Nom : ' + prenom + ' ' + nom,
+      'Contact : ' + contact,
+      '',
+      message
+    ]);
+    showModal('✉️', 'Votre messagerie va s\'ouvrir', 'Votre application mail va s\'ouvrir avec le message pré-rempli, à destination de ' + CONTACT_EMAIL + '. Il ne vous reste plus qu\'à cliquer sur "Envoyer".');
+    form.reset();
+  });
+
+  // ── MODAL ──
+  function showModal(icon, title, text) {
+    document.getElementById('modal-icon').textContent = icon;
+    document.getElementById('modal-title').textContent = title;
+    document.getElementById('modal-text').textContent = text;
+    document.getElementById('modal').classList.add('open');
+  }
+  function closeModal() { document.getElementById('modal').classList.remove('open'); }
+  document.getElementById('modal-close-btn').addEventListener('click', closeModal);
+  document.getElementById('modal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+
+}); // fin DOMContentLoaded
+</script>
+</body>
+</html>
