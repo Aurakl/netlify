@@ -4,6 +4,13 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Jordan Gandrey — Infirmier en Santé Mentale</title>
+<meta name="description" content="Infirmier indépendant en santé mentale à domicile, cantons de Vaud et Neuchâtel. Suivi psychiatrique, entretiens, injections retard, coordination de soins. Reconnu LAMal."/>
+<meta property="og:type" content="website"/>
+<meta property="og:locale" content="fr_CH"/>
+<meta property="og:title" content="Jordan Gandrey — Infirmier en Santé Mentale"/>
+<meta property="og:description" content="Infirmier indépendant en santé mentale à domicile, cantons de Vaud et Neuchâtel. Reconnu LAMal."/>
+<meta name="twitter:card" content="summary"/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23c07a5a'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='34' font-style='italic' fill='%23fff' text-anchor='middle'%3EJ%3C/text%3E%3C/svg%3E"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <!-- Cal.com -->
@@ -262,10 +269,6 @@ footer{background:var(--ink);padding:3rem;display:flex;align-items:center;justif
 .footer-links a:hover{color:var(--clay-light);}
 .footer-legal{font-size:.74rem;color:rgba(255,255,255,.3);}
 
-.rdv-type-btn{padding:.7rem 1.6rem;border-radius:50px;border:1.5px solid var(--sand);background:transparent;color:var(--ink-mid);font-family:'Outfit',sans-serif;font-size:.88rem;font-weight:400;cursor:pointer;transition:all .2s;}
-.rdv-type-btn.active{background:var(--clay);border-color:var(--clay);color:#fff;font-weight:500;box-shadow:0 4px 16px rgba(192,120,90,.3);}
-.rdv-type-btn:not(.active):hover{border-color:var(--clay-light);color:var(--clay);}
-
 /* RESPONSIVE */
 @media(max-width:1024px){
   .hero-inner{grid-template-columns:1fr;gap:3rem;}
@@ -321,7 +324,7 @@ footer{background:var(--ink);padding:3rem;display:flex;align-items:center;justif
     <li><span class="nav-badge" id="nav-badge">Disponible</span></li>
     <li><a data-page="rdv" class="nav-pill">📅 Prendre RDV</a></li>
   </ul>
-  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  <button class="hamburger" id="hamburger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav-links"><span></span><span></span><span></span></button>
 </nav>
 
 <!-- BOUTON FLOTTANT -->
@@ -343,7 +346,7 @@ footer{background:var(--ink);padding:3rem;display:flex;align-items:center;justif
     </div>
     <!-- FORM PATIENT -->
     <div class="side-form" id="side-form-patient">
-      <form name="demande-patient" method="POST" data-netlify="true" netlify-honeypot="bot-field-patient">
+      <form id="form-patient" name="demande-patient" method="POST" data-netlify="true" netlify-honeypot="bot-field-patient">
         <input type="hidden" name="form-name" value="demande-patient"/>
         <p style="display:none"><label>Ne pas remplir : <input name="bot-field-patient"/></label></p>
         <div class="side-form-group"><label>Prénom &amp; Nom *</label><input type="text" id="s-nom" placeholder="Prénom Nom"/></div>
@@ -363,7 +366,7 @@ footer{background:var(--ink);padding:3rem;display:flex;align-items:center;justif
         </div>
         <div class="side-form-group"><label>Adresse *</label><input type="text" id="s-adresse" placeholder="Rue, ville, NPA"/></div>
         <div class="side-note">✉️ Votre demande est envoyée directement, sans passer par votre messagerie.</div>
-        <button class="side-submit" type="button" id="btn-book-patient">Confirmer le rendez-vous</button>
+        <button class="side-submit" type="submit" id="btn-book-patient">Confirmer le rendez-vous</button>
       </form>
       <div class="side-tel-block">
         <div class="side-tel-label">Besoin d'aide ?</div>
@@ -373,7 +376,7 @@ footer{background:var(--ink);padding:3rem;display:flex;align-items:center;justif
     </div>
     <!-- FORM PRO -->
     <div class="side-form" id="side-form-pro" hidden>
-      <form name="demande-pro" method="POST" data-netlify="true" netlify-honeypot="bot-field-pro">
+      <form id="form-pro" name="demande-pro" method="POST" data-netlify="true" netlify-honeypot="bot-field-pro">
         <input type="hidden" name="form-name" value="demande-pro"/>
         <p style="display:none"><label>Ne pas remplir : <input name="bot-field-pro"/></label></p>
         <div class="side-form-group"><label>Prénom &amp; Nom *</label><input type="text" id="sp-nom" placeholder="Prénom Nom"/></div>
@@ -403,7 +406,7 @@ footer{background:var(--ink);padding:3rem;display:flex;align-items:center;justif
           </select>
         </div>
         <div class="side-note">🏥 Votre demande est envoyée directement, sans passer par votre messagerie.</div>
-        <button class="side-submit" type="button" id="btn-book-pro">Envoyer la demande</button>
+        <button class="side-submit" type="submit" id="btn-book-pro">Envoyer la demande</button>
       </form>
       <div class="side-tel-block">
         <div class="side-tel-label">Besoin d'aide ?</div>
@@ -498,11 +501,11 @@ footer{background:var(--ink);padding:3rem;display:flex;align-items:center;justif
         <h2 class="section-h2">Tout ce que vous<br>voulez <em>savoir</em></h2>
       </div>
       <div class="faq-list">
-        <div class="faq-item reveal"><button class="faq-question">Ai-je besoin d'une ordonnance ?<span class="faq-arrow">▼</span></button><div class="faq-answer"><div class="faq-answer-inner">Oui, en Suisse les soins infirmiers remboursés par LAMal nécessitent une ordonnance médicale. Je peux vous aider à l'obtenir en coordination avec votre médecin.</div></div></div>
-        <div class="faq-item reveal reveal-delay-1"><button class="faq-question">Quelles assurances prennent en charge vos soins ?<span class="faq-arrow">▼</span></button><div class="faq-answer"><div class="faq-answer-inner">Mes prestations sont reconnues LAMal. La prise en charge dépend de votre contrat et franchise. La plupart des assurances complémentaires couvrent également une part des soins.</div></div></div>
-        <div class="faq-item reveal reveal-delay-2"><button class="faq-question">Dans quels cantons intervenez-vous ?<span class="faq-arrow">▼</span></button><div class="faq-answer"><div class="faq-answer-inner">J'interviens dans tout le canton de Vaud et tout le canton de Neuchâtel, à domicile. Pour toute demande hors de ces cantons, contactez-moi directement.</div></div></div>
-        <div class="faq-item reveal reveal-delay-3"><button class="faq-question">Comment se passe la première prise en charge ?<span class="faq-arrow">▼</span></button><div class="faq-answer"><div class="faq-answer-inner">Nous commençons par un entretien d'évaluation à votre domicile, sans engagement. Cela me permet de comprendre votre situation et construire un plan de soins adapté.</div></div></div>
-        <div class="faq-item reveal reveal-delay-4"><button class="faq-question">Intervenez-vous en urgence ?<span class="faq-arrow">▼</span></button><div class="faq-answer"><div class="faq-answer-inner">Pour les urgences psychiatriques, contactez le 144 ou le 143 (La Main Tendue). Pour les demandes urgentes non-vitales, appelez-moi directement au 078 447 78 46.</div></div></div>
+        <div class="faq-item reveal"><button class="faq-question" aria-expanded="false">Ai-je besoin d'une ordonnance ?<span class="faq-arrow">▼</span></button><div class="faq-answer"><div class="faq-answer-inner">Oui, en Suisse les soins infirmiers remboursés par LAMal nécessitent une ordonnance médicale. Je peux vous aider à l'obtenir en coordination avec votre médecin.</div></div></div>
+        <div class="faq-item reveal reveal-delay-1"><button class="faq-question" aria-expanded="false">Quelles assurances prennent en charge vos soins ?<span class="faq-arrow">▼</span></button><div class="faq-answer"><div class="faq-answer-inner">Mes prestations sont reconnues LAMal. La prise en charge dépend de votre contrat et franchise. La plupart des assurances complémentaires couvrent également une part des soins.</div></div></div>
+        <div class="faq-item reveal reveal-delay-2"><button class="faq-question" aria-expanded="false">Dans quels cantons intervenez-vous ?<span class="faq-arrow">▼</span></button><div class="faq-answer"><div class="faq-answer-inner">J'interviens dans tout le canton de Vaud et tout le canton de Neuchâtel, à domicile. Pour toute demande hors de ces cantons, contactez-moi directement.</div></div></div>
+        <div class="faq-item reveal reveal-delay-3"><button class="faq-question" aria-expanded="false">Comment se passe la première prise en charge ?<span class="faq-arrow">▼</span></button><div class="faq-answer"><div class="faq-answer-inner">Nous commençons par un entretien d'évaluation à votre domicile, sans engagement. Cela me permet de comprendre votre situation et construire un plan de soins adapté.</div></div></div>
+        <div class="faq-item reveal reveal-delay-4"><button class="faq-question" aria-expanded="false">Intervenez-vous en urgence ?<span class="faq-arrow">▼</span></button><div class="faq-answer"><div class="faq-answer-inner">Pour les urgences psychiatriques, contactez le 144 ou le 143 (La Main Tendue). Pour les demandes urgentes non-vitales, appelez-moi directement au 078 447 78 46.</div></div></div>
       </div>
     </div>
   </section>
@@ -619,7 +622,7 @@ footer{background:var(--ink);padding:3rem;display:flex;align-items:center;justif
               <div class="form-row">
                 <div class="form-group form-full"><label>Message</label><textarea name="message" placeholder="Question, demande d'information, coordination…" required></textarea></div>
               </div>
-              <button type="button" class="form-submit" id="btn-contact-send">Envoyer le message</button>
+              <button type="submit" class="form-submit" id="btn-contact-send">Envoyer le message</button>
             </form>
           </div>
         </div>
@@ -710,15 +713,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Boutons sélecteur de type RDV
-  document.querySelectorAll('.rdv-type-btn').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      document.querySelectorAll('.rdv-type-btn').forEach(function(b) { b.classList.remove('active'); });
-      btn.classList.add('active');
-      initCal("jordan-gandrey/" + btn.dataset.cal);
-    });
-  });
-
   // ── LOADER ──
   initReveal();
   initCounters();
@@ -735,15 +729,20 @@ document.addEventListener('DOMContentLoaded', function() {
   var hamburger = document.getElementById('hamburger');
   var navLinks = document.getElementById('nav-links');
   hamburger.addEventListener('click', function() {
-    hamburger.classList.toggle('open');
+    var open = hamburger.classList.toggle('open');
     navLinks.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
   });
 
-  // ── DISPONIBILITÉ ──
+  // ── DISPONIBILITÉ (heure de Suisse, quel que soit le fuseau du visiteur) ──
   function updateAvailability() {
-    var now = new Date();
-    var day = now.getDay(); var h = now.getHours();
-    var available = (day >= 1 && day <= 6 && h >= 7 && h < 20) || (day === 0 && h >= 8 && h < 13);
+    var parts = new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Europe/Zurich', weekday: 'short', hour: 'numeric', hour12: false
+    }).formatToParts(new Date());
+    var weekday = parts.find(function(p) { return p.type === 'weekday'; }).value;
+    var h = parseInt(parts.find(function(p) { return p.type === 'hour'; }).value, 10);
+    var dayIndex = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].indexOf(weekday);
+    var available = (dayIndex >= 1 && dayIndex <= 6 && h >= 7 && h < 20) || (dayIndex === 0 && h >= 8 && h < 13);
     var badge = document.getElementById('nav-badge');
     var availText = document.getElementById('avail-text');
     if (badge) {
@@ -754,32 +753,33 @@ document.addEventListener('DOMContentLoaded', function() {
     if (availText) availText.textContent = available ? "Disponible aujourd'hui" : 'Indisponible ce créneau';
   }
   updateAvailability();
+  setInterval(updateAvailability, 60000);
 
-  // ── REVEAL ──
+  // ── REVEAL (observers créés une seule fois, réutilisés à chaque navigation) ──
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, {threshold: 0.12});
   function initReveal() {
-    var obs = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, {threshold: 0.12});
-    document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(function(el) { obs.observe(el); });
+    document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(function(el) { revealObserver.observe(el); });
   }
 
   // ── COUNTERS ──
+  var counterObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting && !e.target.dataset.done) {
+        e.target.dataset.done = '1';
+        var target = parseInt(e.target.dataset.target);
+        var cur = 0; var step = Math.max(1, Math.ceil(target/40));
+        var t = setInterval(function() {
+          cur = Math.min(cur + step, target);
+          e.target.textContent = cur;
+          if (cur >= target) clearInterval(t);
+        }, 40);
+      }
+    });
+  }, {threshold: 0.3});
   function initCounters() {
-    var obs = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e) {
-        if (e.isIntersecting && !e.target.dataset.done) {
-          e.target.dataset.done = '1';
-          var target = parseInt(e.target.dataset.target);
-          var cur = 0; var step = Math.max(1, Math.ceil(target/40));
-          var t = setInterval(function() {
-            cur = Math.min(cur + step, target);
-            e.target.textContent = cur;
-            if (cur >= target) clearInterval(t);
-          }, 40);
-        }
-      });
-    }, {threshold: 0.3});
-    document.querySelectorAll('.counter[data-target]').forEach(function(el) { obs.observe(el); });
+    document.querySelectorAll('.counter[data-target]').forEach(function(el) { counterObserver.observe(el); });
   }
 
   // ── FAQ ──
@@ -787,8 +787,11 @@ document.addEventListener('DOMContentLoaded', function() {
     btn.addEventListener('click', function() {
       var item = btn.closest('.faq-item');
       var wasOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item').forEach(function(i) { i.classList.remove('open'); });
-      if (!wasOpen) item.classList.add('open');
+      document.querySelectorAll('.faq-item').forEach(function(i) {
+        i.classList.remove('open');
+        i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+      });
+      if (!wasOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
     });
   });
 
@@ -832,7 +835,8 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // ── SIDE PANEL RDV ──
-  document.getElementById('btn-book-patient').addEventListener('click', function() {
+  document.getElementById('form-patient').addEventListener('submit', function(e) {
+    e.preventDefault();
     var nom = document.getElementById('s-nom').value.trim();
     var tel = document.getElementById('s-tel').value.trim();
     var date = document.getElementById('s-date').value;
@@ -859,7 +863,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  document.getElementById('btn-book-pro').addEventListener('click', function() {
+  document.getElementById('form-pro').addEventListener('submit', function(e) {
+    e.preventDefault();
     var nom = document.getElementById('sp-nom').value.trim();
     var profession = document.getElementById('sp-profession').value;
     var tel = document.getElementById('sp-tel').value.trim();
@@ -893,8 +898,9 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // ── CONTACT FORM (soumission directe via Netlify Forms, sans logiciel mail) ──
-  document.getElementById('btn-contact-send').addEventListener('click', function() {
-    var form = document.getElementById('contact-form');
+  document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var form = e.target;
     var prenom = form.querySelector('[name="prenom"]').value.trim();
     var nom = form.querySelector('[name="nom"]').value.trim();
     var contact = form.querySelector('[name="contact"]').value.trim();
