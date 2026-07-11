@@ -713,12 +713,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // ── LOADER ──
+  // ── LOADER (indépendant du chargement des ressources externes,
+  // pour ne jamais rester bloqué sur une connexion lente/instable) ──
   initReveal();
   initCounters();
-  window.addEventListener('load', function() {
-    setTimeout(function() { document.getElementById('loader').classList.add('done'); }, 1800);
-  });
+  setTimeout(function() { document.getElementById('loader').classList.add('done'); }, 1800);
 
   // ── NAV SCROLL ──
   window.addEventListener('scroll', function() {
@@ -735,13 +734,25 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // ── DISPONIBILITÉ (heure de Suisse, quel que soit le fuseau du visiteur) ──
+  function getZurichDayAndHour() {
+    try {
+      var parts = new Intl.DateTimeFormat('en-GB', {
+        timeZone: 'Europe/Zurich', weekday: 'short', hour: 'numeric', hour12: false
+      }).formatToParts(new Date());
+      var weekday = parts.find(function(p) { return p.type === 'weekday'; }).value;
+      var h = parseInt(parts.find(function(p) { return p.type === 'hour'; }).value, 10);
+      var dayIndex = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].indexOf(weekday);
+      if (dayIndex === -1 || isNaN(h)) throw new Error('parse');
+      return {dayIndex: dayIndex, hour: h};
+    } catch (err) {
+      // Repli sur l'heure locale de l'appareil si le fuseau Europe/Zurich n'est pas supporté
+      var now = new Date();
+      return {dayIndex: now.getDay(), hour: now.getHours()};
+    }
+  }
   function updateAvailability() {
-    var parts = new Intl.DateTimeFormat('en-GB', {
-      timeZone: 'Europe/Zurich', weekday: 'short', hour: 'numeric', hour12: false
-    }).formatToParts(new Date());
-    var weekday = parts.find(function(p) { return p.type === 'weekday'; }).value;
-    var h = parseInt(parts.find(function(p) { return p.type === 'hour'; }).value, 10);
-    var dayIndex = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].indexOf(weekday);
+    var zurich = getZurichDayAndHour();
+    var dayIndex = zurich.dayIndex, h = zurich.hour;
     var available = (dayIndex >= 1 && dayIndex <= 6 && h >= 7 && h < 20) || (dayIndex === 0 && h >= 8 && h < 13);
     var badge = document.getElementById('nav-badge');
     var availText = document.getElementById('avail-text');
