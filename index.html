@@ -349,12 +349,12 @@ footer{background:var(--ink);padding:3rem;display:flex;align-items:center;justif
       <form id="form-patient" name="demande-patient" method="POST" data-netlify="true" netlify-honeypot="bot-field-patient">
         <input type="hidden" name="form-name" value="demande-patient"/>
         <p style="display:none"><label>Ne pas remplir : <input name="bot-field-patient"/></label></p>
-        <div class="side-form-group"><label>Prénom &amp; Nom *</label><input type="text" id="s-nom" placeholder="Prénom Nom"/></div>
-        <div class="side-form-group"><label>Téléphone *</label><input type="tel" id="s-tel" placeholder="078 XXX XX XX"/></div>
-        <div class="side-form-group"><label>Date souhaitée *</label><input type="date" id="s-date"/></div>
-        <div class="side-form-group"><label>Heure * (09h–17h)</label><input type="time" id="s-heure" min="09:00" max="17:00"/></div>
+        <div class="side-form-group"><label>Prénom &amp; Nom *</label><input type="text" id="s-nom" name="nom" placeholder="Prénom Nom"/></div>
+        <div class="side-form-group"><label>Téléphone *</label><input type="tel" id="s-tel" name="telephone" placeholder="078 XXX XX XX"/></div>
+        <div class="side-form-group"><label>Date souhaitée *</label><input type="date" id="s-date" name="date"/></div>
+        <div class="side-form-group"><label>Heure * (09h–17h)</label><input type="time" id="s-heure" name="heure" min="09:00" max="17:00"/></div>
         <div class="side-form-group"><label>Type de soin *</label>
-          <select id="s-soin">
+          <select id="s-soin" name="soin">
             <option value="">Sélectionner...</option>
             <option>Entretien infirmier / soutien</option>
             <option>Préparation du pilulier</option>
@@ -364,7 +364,7 @@ footer{background:var(--ink);padding:3rem;display:flex;align-items:center;justif
             <option>Autre / première prise de contact</option>
           </select>
         </div>
-        <div class="side-form-group"><label>Adresse *</label><input type="text" id="s-adresse" placeholder="Rue, ville, NPA"/></div>
+        <div class="side-form-group"><label>Adresse *</label><input type="text" id="s-adresse" name="adresse" placeholder="Rue, ville, NPA"/></div>
         <div class="side-note">✉️ Votre demande est envoyée directement, sans passer par votre messagerie.</div>
         <button class="side-submit" type="submit" id="btn-book-patient">Confirmer le rendez-vous</button>
       </form>
@@ -379,9 +379,9 @@ footer{background:var(--ink);padding:3rem;display:flex;align-items:center;justif
       <form id="form-pro" name="demande-pro" method="POST" data-netlify="true" netlify-honeypot="bot-field-pro">
         <input type="hidden" name="form-name" value="demande-pro"/>
         <p style="display:none"><label>Ne pas remplir : <input name="bot-field-pro"/></label></p>
-        <div class="side-form-group"><label>Prénom &amp; Nom *</label><input type="text" id="sp-nom" placeholder="Prénom Nom"/></div>
+        <div class="side-form-group"><label>Prénom &amp; Nom *</label><input type="text" id="sp-nom" name="nom" placeholder="Prénom Nom"/></div>
         <div class="side-form-group"><label>Profession *</label>
-          <select id="sp-profession">
+          <select id="sp-profession" name="profession">
             <option value="">Sélectionner...</option>
             <option>Psychiatre</option>
             <option>Médecin généraliste</option>
@@ -392,11 +392,11 @@ footer{background:var(--ink);padding:3rem;display:flex;align-items:center;justif
             <option>Autre</option>
           </select>
         </div>
-        <div class="side-form-group"><label>Téléphone *</label><input type="tel" id="sp-tel" placeholder="078 XXX XX XX"/></div>
-        <div class="side-form-group"><label>Date souhaitée *</label><input type="date" id="sp-date"/></div>
-        <div class="side-form-group"><label>Heure * (09h–17h)</label><input type="time" id="sp-heure" min="09:00" max="17:00"/></div>
+        <div class="side-form-group"><label>Téléphone *</label><input type="tel" id="sp-tel" name="telephone" placeholder="078 XXX XX XX"/></div>
+        <div class="side-form-group"><label>Date souhaitée *</label><input type="date" id="sp-date" name="date"/></div>
+        <div class="side-form-group"><label>Heure * (09h–17h)</label><input type="time" id="sp-heure" name="heure" min="09:00" max="17:00"/></div>
         <div class="side-form-group"><label>Motif *</label>
-          <select id="sp-motif">
+          <select id="sp-motif" name="motif">
             <option value="">Sélectionner...</option>
             <option>Demande de suivi pour un patient</option>
             <option>Coordination de soins</option>
