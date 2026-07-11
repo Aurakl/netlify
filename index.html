@@ -715,8 +715,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // ── LOADER (indépendant du chargement des ressources externes,
   // pour ne jamais rester bloqué sur une connexion lente/instable) ──
-  initReveal();
-  initCounters();
   setTimeout(function() { document.getElementById('loader').classList.add('done'); }, 1800);
 
   // ── NAV SCROLL ──
@@ -948,6 +946,10 @@ document.addEventListener('DOMContentLoaded', function() {
   function closeModal() { document.getElementById('modal').classList.remove('open'); }
   document.getElementById('modal-close-btn').addEventListener('click', closeModal);
   document.getElementById('modal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+
+  // Animations d'entrée de la page initiale (une fois tout défini ci-dessus)
+  initReveal();
+  initCounters();
 
 }); // fin DOMContentLoaded
 </script>
