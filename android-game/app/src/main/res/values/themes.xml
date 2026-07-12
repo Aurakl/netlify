@@ -1,0 +1,6 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.RiftChampions" parent="android:Theme.Material.NoActionBar">
+        <item name="android:statusBarColor" tools:targetApi="l">#0F0B12</item>
+        <item name="android:windowBackground">#0F0B12</item>
+    </style>
+</resources>
