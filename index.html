@@ -9,8 +9,27 @@
 <meta property="og:locale" content="fr_CH"/>
 <meta property="og:title" content="Jordan Gandrey — Infirmier en Santé Mentale"/>
 <meta property="og:description" content="Infirmier indépendant en santé mentale à domicile, cantons de Vaud et Neuchâtel. Reconnu LAMal."/>
+<meta property="og:url" content="https://gandrey-santementale.ch/"/>
 <meta name="twitter:card" content="summary"/>
+<link rel="canonical" href="https://gandrey-santementale.ch/"/>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23c07a5a'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='34' font-style='italic' fill='%23fff' text-anchor='middle'%3EJ%3C/text%3E%3C/svg%3E"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalBusiness",
+  "name": "Jordan Gandrey - Infirmier en Santé Mentale",
+  "description": "Infirmier indépendant en santé mentale à domicile, cantons de Vaud et Neuchâtel. Reconnu LAMal.",
+  "url": "https://gandrey-santementale.ch/",
+  "telephone": "+41784477846",
+  "email": "jordan.gandrey.psy@gmail.com",
+  "areaServed": [
+    {"@type": "AdministrativeArea", "name": "Canton de Vaud"},
+    {"@type": "AdministrativeArea", "name": "Canton de Neuchâtel"}
+  ],
+  "medicalSpecialty": "Psychiatric",
+  "priceRange": "LAMal"
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <!-- Cal.com -->
@@ -175,17 +194,6 @@ nav.scrolled{background:rgba(250,247,243,.98);box-shadow:0 1px 0 var(--sand);pad
 .zone-canton-name{font-family:'Playfair Display',serif;font-size:1rem;font-weight:500;}
 .zone-canton-desc{font-size:.78rem;color:var(--ink-light);margin-top:.1rem;}
 
-/* TEMOIGNAGES */
-.temoignages-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem;}
-.temoignage-card{background:var(--paper);border:1px solid var(--sand);border-radius:22px;padding:2rem;position:relative;}
-.temoignage-card::before{content:'"';font-family:'Playfair Display',serif;font-size:5rem;color:rgba(192,120,90,.15);position:absolute;top:.5rem;right:1.5rem;line-height:1;}
-.temo-stars{color:var(--clay);font-size:1rem;margin-bottom:1rem;letter-spacing:.1em;}
-.temo-text{font-size:.9rem;color:var(--ink-mid);line-height:1.85;font-weight:300;font-style:italic;}
-.temo-author{margin-top:1.2rem;display:flex;align-items:center;gap:.8rem;}
-.temo-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--sand),rgba(192,120,90,.3));display:flex;align-items:center;justify-content:center;font-size:1rem;}
-.temo-name{font-size:.82rem;font-weight:500;color:var(--ink);}
-.temo-detail{font-size:.74rem;color:var(--ink-light);}
-
 /* FAQ */
 .faq-list{max-width:720px;margin:3rem auto 0;display:flex;flex-direction:column;gap:.8rem;}
 .faq-item{background:var(--paper-warm);border:1px solid var(--sand);border-radius:16px;overflow:hidden;}
@@ -276,7 +284,6 @@ footer{background:var(--ink);padding:3rem;display:flex;align-items:center;justif
   .about-grid{grid-template-columns:1fr;gap:3rem;}
   .counters-grid{grid-template-columns:repeat(2,1fr);}
   .contact-grid{grid-template-columns:1fr;}
-  .temoignages-grid{grid-template-columns:1fr;}
 }
 @media(max-width:768px){
   nav{padding:1rem 1.5rem;}
@@ -467,33 +474,6 @@ footer{background:var(--ink);padding:3rem;display:flex;align-items:center;justif
     </div>
   </section>
 
-  <section class="section" style="background:var(--paper-warm)">
-    <div class="section-inner">
-      <div class="reveal" style="text-align:center;margin-bottom:3rem">
-        <div class="section-eyebrow" style="justify-content:center">Témoignages</div>
-        <h2 class="section-h2">Ce que disent<br><em>mes patients</em></h2>
-        <p class="section-desc" style="margin:0 auto">Témoignages anonymisés, partagés avec accord.</p>
-      </div>
-      <div class="temoignages-grid">
-        <div class="temoignage-card reveal reveal-delay-1">
-          <div class="temo-stars">★★★★★</div>
-          <p class="temo-text">Jordan a su créer une relation de confiance dès la première visite. Son écoute bienveillante et sa disponibilité ont vraiment changé mon quotidien.</p>
-          <div class="temo-author"><div class="temo-avatar">👤</div><div><div class="temo-name">Patient anonyme</div><div class="temo-detail">Suivi depuis 18 mois · Canton de Vaud</div></div></div>
-        </div>
-        <div class="temoignage-card reveal reveal-delay-2">
-          <div class="temo-stars">★★★★★</div>
-          <p class="temo-text">En tant que médecin traitant, j'apprécie la qualité des transmissions et la rigueur clinique de Jordan. La coordination est fluide et le patient est vraiment au centre.</p>
-          <div class="temo-author"><div class="temo-avatar">🩺</div><div><div class="temo-name">Médecin généraliste</div><div class="temo-detail">Partenaire professionnel · Neuchâtel</div></div></div>
-        </div>
-        <div class="temoignage-card reveal reveal-delay-3">
-          <div class="temo-stars">★★★★★</div>
-          <p class="temo-text">Mon frère est suivi par Jordan depuis sa sortie d'hospitalisation. La transition a été tellement plus douce. Jordan a pris le temps d'expliquer chaque étape à toute la famille.</p>
-          <div class="temo-author"><div class="temo-avatar">👥</div><div><div class="temo-name">Proche aidant</div><div class="temo-detail">Accompagnement familial · Canton de Vaud</div></div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section class="section" style="background:var(--paper)">
     <div class="section-inner">
       <div class="reveal" style="text-align:center;margin-bottom:0">
@@ -646,6 +626,32 @@ footer{background:var(--ink);padding:3rem;display:flex;align-items:center;justif
   </section>
 </div>
 
+<!-- ══ PAGE MENTIONS LÉGALES ══ -->
+<div class="page" id="page-legal">
+  <section class="section" style="padding-top:8rem;background:var(--paper)">
+    <div class="section-inner">
+      <div class="reveal" style="max-width:720px;margin:0 auto">
+        <div class="section-eyebrow">Informations</div>
+        <h2 class="section-h2">Mentions légales &amp;<br><em>protection des données</em></h2>
+
+        <h3 style="font-family:'Playfair Display',serif;font-weight:500;margin-top:2.4rem;margin-bottom:.6rem">Éditeur du site</h3>
+        <p style="font-size:.92rem;color:var(--ink-mid);line-height:1.85;font-weight:300">Jordan Gandrey, infirmier indépendant (RCC D965733). Activité exercée à domicile, sans cabinet fixe, dans les cantons de Vaud et Neuchâtel.<br>Téléphone : 078 447 78 46 · Email : <a href="mailto:jordan.gandrey.psy@gmail.com" style="color:var(--clay)">jordan.gandrey.psy@gmail.com</a></p>
+
+        <h3 style="font-family:'Playfair Display',serif;font-weight:500;margin-top:2rem;margin-bottom:.6rem">Hébergement</h3>
+        <p style="font-size:.92rem;color:var(--ink-mid);line-height:1.85;font-weight:300">Ce site est hébergé par Netlify, Inc. (San Francisco, États-Unis).</p>
+
+        <h3 style="font-family:'Playfair Display',serif;font-weight:500;margin-top:2rem;margin-bottom:.6rem">Protection des données (nLPD)</h3>
+        <p style="font-size:.92rem;color:var(--ink-mid);line-height:1.85;font-weight:300">Les formulaires de ce site (contact, demande de suivi patient, demande professionnelle) collectent les données que vous saisissez volontairement : nom, téléphone, adresse, date et heure souhaitées, type de soin ou motif, et message. Ces données sont utilisées uniquement pour traiter votre demande et vous recontacter, et sont transmises par email à Jordan Gandrey via le service Netlify Forms.</p>
+        <p style="font-size:.92rem;color:var(--ink-mid);line-height:1.85;font-weight:300;margin-top:.9rem">Elles ne sont ni vendues, ni transmises à des tiers à des fins commerciales, et sont conservées uniquement le temps nécessaire au traitement de votre demande et au suivi de la prise en charge. Conformément à la loi fédérale sur la protection des données (nLPD), vous pouvez à tout moment demander l'accès, la rectification ou la suppression de vos données en écrivant à l'adresse email ci-dessus.</p>
+        <p style="font-size:.92rem;color:var(--ink-mid);line-height:1.85;font-weight:300;margin-top:.9rem">Ce site ne dépose pas de cookies de suivi ou publicitaires. Le chargement des polices (Google Fonts) et du widget de réservation (Cal.com) peut transmettre votre adresse IP à ces services tiers dans le cadre technique normal de leur fonctionnement.</p>
+
+        <h3 style="font-family:'Playfair Display',serif;font-weight:500;margin-top:2rem;margin-bottom:.6rem">Avertissement</h3>
+        <p style="font-size:.92rem;color:var(--ink-mid);line-height:1.85;font-weight:300">Le contenu de ce site est fourni à titre informatif et ne remplace pas une consultation médicale. En cas d'urgence vitale, composez le 144 ; pour une écoute psychologique immédiate, La Main Tendue est joignable au 143.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
 <!-- MODAL -->
 <div class="modal-overlay" id="modal">
   <div class="modal-box">
@@ -665,6 +671,7 @@ footer{background:var(--ink);padding:3rem;display:flex;align-items:center;justif
     <li><a data-page="services">Soins</a></li>
     <li><a data-page="rdv">RDV</a></li>
     <li><a data-page="contact">Contact</a></li>
+    <li><a data-page="legal">Mentions légales</a></li>
   </ul>
   <div class="footer-legal">© 2025 · RCC : D965733 · Vaud &amp; Neuchâtel</div>
 </footer>

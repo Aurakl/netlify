@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gandrey-santementale.ch/sitemap.xml
