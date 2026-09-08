@@ -27,7 +27,13 @@
     {"@type": "AdministrativeArea", "name": "Canton de Neuchâtel"}
   ],
   "medicalSpecialty": "Psychiatric",
-  "priceRange": "LAMal"
+  "priceRange": "LAMal",
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "opens": "08:00",
+    "closes": "18:00"
+  }
 }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -35,7 +41,8 @@
 <!-- Cal.com -->
 <script type="text/javascript">
 (function(C,A,L){let p=function(a,ar){a.q.push(ar);};let d=C.document;C.Cal=C.Cal||function(){let cal=C.Cal;let ar=arguments;if(!cal.loaded){cal.ns={};cal.q=cal.q||[];d.head.appendChild(d.createElement("script")).src=A;cal.loaded=true;}if(ar[0]===L){const api=function(){p(api,arguments);};const namespace=ar[1];api.q=api.q||[];if(typeof namespace==="string"){cal.ns[namespace]=cal.ns[namespace]||api;p(cal.ns[namespace],ar);p(cal,["-",namespace,api]);}else{p(cal,ar);}return;}p(cal,ar);};})(window,"https://app.cal.com/embed/embed.js","init");
-Cal("init", {origin:"https://cal.com"});
+// Note : Cal("init", ...) n'est plus appelé ici. Le script Cal.com n'est chargé
+// que lorsque la page RDV est ouverte pour la première fois (voir initCal() plus bas).
 </script>
 <style>
 :root{
@@ -52,11 +59,11 @@ body{font-family:'Outfit',sans-serif;background:var(--paper);color:var(--ink);ov
 /* LOADER */
 #loader{position:fixed;inset:0;z-index:10000;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;transition:opacity .6s,visibility .6s;}
 #loader.done{opacity:0;visibility:hidden;}
-.loader-logo{font-family:'Playfair Display',serif;font-size:2rem;color:#fff;letter-spacing:.08em;opacity:0;animation:fadeIn .8s .3s forwards;}
+.loader-logo{font-family:'Playfair Display',serif;font-size:2rem;color:#fff;letter-spacing:.08em;opacity:0;animation:fadeIn .4s .1s forwards;}
 .loader-logo span{color:var(--clay-light);}
 .loader-bar{width:180px;height:2px;background:rgba(255,255,255,.15);border-radius:2px;overflow:hidden;}
-.loader-fill{height:100%;width:0;background:var(--clay-light);animation:fillBar 1.6s .4s ease forwards;}
-.loader-sub{font-size:.78rem;color:rgba(255,255,255,.4);letter-spacing:.12em;text-transform:uppercase;opacity:0;animation:fadeIn .8s .6s forwards;}
+.loader-fill{height:100%;width:0;background:var(--clay-light);animation:fillBar .7s .15s ease forwards;}
+.loader-sub{font-size:.78rem;color:rgba(255,255,255,.4);letter-spacing:.12em;text-transform:uppercase;opacity:0;animation:fadeIn .4s .25s forwards;}
 @keyframes fadeIn{to{opacity:1;}}
 @keyframes fillBar{to{width:100%;}}
 
@@ -309,6 +316,9 @@ footer{background:var(--ink);padding:3rem;display:flex;align-items:center;justif
   .hero-actions{flex-direction:column;}
   .btn{justify-content:center;}
 }
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important;}
+}
 </style>
 </head>
 <body>
@@ -359,7 +369,7 @@ footer{background:var(--ink);padding:3rem;display:flex;align-items:center;justif
         <div class="side-form-group"><label>Prénom &amp; Nom *</label><input type="text" id="s-nom" name="nom" placeholder="Prénom Nom"/></div>
         <div class="side-form-group"><label>Téléphone *</label><input type="tel" id="s-tel" name="telephone" placeholder="078 XXX XX XX"/></div>
         <div class="side-form-group"><label>Date souhaitée *</label><input type="date" id="s-date" name="date"/></div>
-        <div class="side-form-group"><label>Heure * (08h–18h)</label><input type="time" id="s-heure" name="heure" min="08:00" max="18:00"/></div>
+        <div class="side-form-group"><label>Heure * (09h–16h)</label><input type="time" id="s-heure" name="heure" min="09:00" max="16:00"/></div>
         <div class="side-form-group"><label>Type de soin *</label>
           <select id="s-soin" name="soin">
             <option value="">Sélectionner...</option>
@@ -401,7 +411,7 @@ footer{background:var(--ink);padding:3rem;display:flex;align-items:center;justif
         </div>
         <div class="side-form-group"><label>Téléphone *</label><input type="tel" id="sp-tel" name="telephone" placeholder="078 XXX XX XX"/></div>
         <div class="side-form-group"><label>Date souhaitée *</label><input type="date" id="sp-date" name="date"/></div>
-        <div class="side-form-group"><label>Heure * (08h–18h)</label><input type="time" id="sp-heure" name="heure" min="08:00" max="18:00"/></div>
+        <div class="side-form-group"><label>Heure * (09h–16h)</label><input type="time" id="sp-heure" name="heure" min="09:00" max="16:00"/></div>
         <div class="side-form-group"><label>Motif *</label>
           <select id="sp-motif" name="motif">
             <option value="">Sélectionner...</option>
@@ -720,10 +730,15 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // ── CAL.COM ──
+  // ── CAL.COM (chargé uniquement à la première ouverture de la page RDV) ──
   var currentCalLink = "jordan-gandrey/autre-rendez-vous";
+  var calScriptInitialized = false;
 
   function initCal(calLink) {
+    if (!calScriptInitialized) {
+      Cal("init", {origin: "https://cal.com"});
+      calScriptInitialized = true;
+    }
     calLink = calLink || currentCalLink;
     currentCalLink = calLink;
     var widget = document.getElementById("cal-inline-widget");
@@ -739,7 +754,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // ── LOADER (indépendant du chargement des ressources externes,
   // pour ne jamais rester bloqué sur une connexion lente/instable) ──
-  setTimeout(function() { document.getElementById('loader').classList.add('done'); }, 1800);
+  setTimeout(function() { document.getElementById('loader').classList.add('done'); }, 900);
 
   // ── NAV SCROLL ──
   window.addEventListener('scroll', function() {
@@ -877,7 +892,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var soin = document.getElementById('s-soin').value;
     var adresse = document.getElementById('s-adresse').value.trim();
     if (!nom||!tel||!date||!heure||!soin||!adresse) { alert('Merci de remplir tous les champs (*).'); return; }
-    if (heure < '08:00' || heure > '18:00') { alert('Les rendez-vous sont possibles entre 08h et 18h.'); return; }
+    if (heure < '09:00' || heure > '16:00') { alert('Les rendez-vous sont possibles entre 09h et 16h.'); return; }
     var btn = document.getElementById('btn-book-patient');
     btn.disabled = true; btn.textContent = 'Envoi en cours…';
     submitNetlifyForm('demande-patient', {
@@ -905,7 +920,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var heure = document.getElementById('sp-heure').value;
     var motif = document.getElementById('sp-motif').value;
     if (!nom||!profession||!tel||!date||!heure||!motif) { alert('Merci de remplir tous les champs (*).'); return; }
-    if (heure < '08:00' || heure > '18:00') { alert('Les rendez-vous sont possibles entre 08h et 18h.'); return; }
+    if (heure < '09:00' || heure > '16:00') { alert('Les rendez-vous sont possibles entre 09h et 16h.'); return; }
     var btn = document.getElementById('btn-book-pro');
     btn.disabled = true; btn.textContent = 'Envoi en cours…';
     submitNetlifyForm('demande-pro', {
