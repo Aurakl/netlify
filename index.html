@@ -359,7 +359,7 @@ footer{background:var(--ink);padding:3rem;display:flex;align-items:center;justif
         <div class="side-form-group"><label>Prénom &amp; Nom *</label><input type="text" id="s-nom" name="nom" placeholder="Prénom Nom"/></div>
         <div class="side-form-group"><label>Téléphone *</label><input type="tel" id="s-tel" name="telephone" placeholder="078 XXX XX XX"/></div>
         <div class="side-form-group"><label>Date souhaitée *</label><input type="date" id="s-date" name="date"/></div>
-        <div class="side-form-group"><label>Heure * (09h–17h)</label><input type="time" id="s-heure" name="heure" min="09:00" max="17:00"/></div>
+        <div class="side-form-group"><label>Heure * (08h–18h)</label><input type="time" id="s-heure" name="heure" min="08:00" max="18:00"/></div>
         <div class="side-form-group"><label>Type de soin *</label>
           <select id="s-soin" name="soin">
             <option value="">Sélectionner...</option>
@@ -401,7 +401,7 @@ footer{background:var(--ink);padding:3rem;display:flex;align-items:center;justif
         </div>
         <div class="side-form-group"><label>Téléphone *</label><input type="tel" id="sp-tel" name="telephone" placeholder="078 XXX XX XX"/></div>
         <div class="side-form-group"><label>Date souhaitée *</label><input type="date" id="sp-date" name="date"/></div>
-        <div class="side-form-group"><label>Heure * (09h–17h)</label><input type="time" id="sp-heure" name="heure" min="09:00" max="17:00"/></div>
+        <div class="side-form-group"><label>Heure * (08h–18h)</label><input type="time" id="sp-heure" name="heure" min="08:00" max="18:00"/></div>
         <div class="side-form-group"><label>Motif *</label>
           <select id="sp-motif" name="motif">
             <option value="">Sélectionner...</option>
@@ -505,11 +505,11 @@ footer{background:var(--ink);padding:3rem;display:flex;align-items:center;justif
         <div class="about-text reveal-right">
           <div class="section-eyebrow">À propos</div>
           <h2 class="section-h2">Bonjour,<br>je suis <em>Jordan.</em></h2>
-          <p style="margin-top:1.2rem">Infirmier diplômé avec près d'une décennie d'expérience en psychiatrie hospitalière et ambulatoire — en France et en Suisse — j'ai choisi l'exercice indépendant pour proposer un suivi de proximité, continu et véritablement centré sur la personne.</p>
+          <p style="margin-top:1.2rem">Infirmier diplômé avec de nombreuses années d'expérience en psychiatrie hospitalière et ambulatoire — en France et en Suisse — j'ai choisi l'exercice indépendant pour proposer un suivi de proximité, continu et véritablement centré sur la personne.</p>
           <p>Ma pratique s'ancre dans une vision <strong>globale et sociale du soin</strong> : je m'intéresse autant à la personne qu'à son environnement, ses relations, son quotidien. La souffrance psychique ne s'entend pas en dehors de l'histoire de vie qui la contient.</p>
           <p>Je travaille en lien étroit avec le Réseau santé Nord Broye, les médecins traitants, les psychiatres et d'autres infirmiers indépendants — parce qu'un soin digne se construit en réseau, pas en silo.</p>
           <div class="about-chips">
-            <span class="tag">Psychiatrie adulte</span><span class="tag moss">Troubles bipolaires</span><span class="tag">Schizophrénie</span><span class="tag dusk">Dépression</span><span class="tag moss">Addictions</span><span class="tag">Suivi post-hospit.</span><span class="tag dusk">Coordination équipes</span>
+            <span class="tag">Psychiatrie adulte</span><span class="tag moss">Troubles bipolaires</span><span class="tag">Schizophrénie</span><span class="tag dusk">Dépression</span><span class="tag moss">Addictions</span><span class="tag">Suivi post-hospit.</span><span class="tag dusk">Coordination de soins</span>
           </div>
         </div>
       </div>
@@ -673,7 +673,7 @@ footer{background:var(--ink);padding:3rem;display:flex;align-items:center;justif
     <li><a data-page="contact">Contact</a></li>
     <li><a data-page="legal">Mentions légales</a></li>
   </ul>
-  <div class="footer-legal">© 2025 · RCC : D965733 · Vaud &amp; Neuchâtel</div>
+  <div class="footer-legal">© <span id="copyright-year">2025</span> · RCC : D965733 · Vaud &amp; Neuchâtel</div>
 </footer>
 
 <script>
@@ -693,6 +693,10 @@ document.addEventListener('DOMContentLoaded', function() {
       el.setAttribute('data-target', years);
     });
   })();
+
+  // ── ANNÉE DE COPYRIGHT (automatique) ──
+  var copyrightYear = document.getElementById('copyright-year');
+  if (copyrightYear) copyrightYear.textContent = new Date().getFullYear();
 
   // ── NAVIGATION ──
   function showPage(name) {
@@ -873,7 +877,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var soin = document.getElementById('s-soin').value;
     var adresse = document.getElementById('s-adresse').value.trim();
     if (!nom||!tel||!date||!heure||!soin||!adresse) { alert('Merci de remplir tous les champs (*).'); return; }
-    if (heure < '09:00' || heure > '17:00') { alert('Les rendez-vous sont possibles entre 09h et 17h.'); return; }
+    if (heure < '08:00' || heure > '18:00') { alert('Les rendez-vous sont possibles entre 08h et 18h.'); return; }
     var btn = document.getElementById('btn-book-patient');
     btn.disabled = true; btn.textContent = 'Envoi en cours…';
     submitNetlifyForm('demande-patient', {
@@ -901,7 +905,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var heure = document.getElementById('sp-heure').value;
     var motif = document.getElementById('sp-motif').value;
     if (!nom||!profession||!tel||!date||!heure||!motif) { alert('Merci de remplir tous les champs (*).'); return; }
-    if (heure < '09:00' || heure > '17:00') { alert('Les rendez-vous sont possibles entre 09h et 17h.'); return; }
+    if (heure < '08:00' || heure > '18:00') { alert('Les rendez-vous sont possibles entre 08h et 18h.'); return; }
     var btn = document.getElementById('btn-book-pro');
     btn.disabled = true; btn.textContent = 'Envoi en cours…';
     submitNetlifyForm('demande-pro', {
