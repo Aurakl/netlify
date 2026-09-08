@@ -439,8 +439,8 @@ footer{background:var(--ink);padding:3rem;display:flex;align-items:center;justif
           <button class="btn btn-outline" data-page="about">Découvrir mon approche</button>
         </div>
         <div class="hero-stats">
-          <div><div class="hero-stat-num"><span class="counter" data-target="9">0</span>+</div><div class="hero-stat-label">Ans d'expérience</div></div>
-          <div><div class="hero-stat-num"><span class="counter" data-target="7">0</span>j/7</div><div class="hero-stat-label">Disponibilité</div></div>
+          <div><div class="hero-stat-num"><span class="counter" data-years-exp="true" data-target="9">0</span>+</div><div class="hero-stat-label">Ans d'expérience</div></div>
+          <div><div class="hero-stat-num"><span class="counter" data-target="5">0</span>j/7</div><div class="hero-stat-label">Disponibilité</div></div>
           <div><div class="hero-stat-num">LAMal</div><div class="hero-stat-label">Reconnu assurances</div></div>
         </div>
       </div>
@@ -466,9 +466,9 @@ footer{background:var(--ink);padding:3rem;display:flex;align-items:center;justif
   <section id="counters-section" class="section">
     <div class="section-inner">
       <div class="counters-grid">
-        <div class="reveal"><div class="counter-num"><span class="counter" data-target="9">0</span><span class="counter-suffix">+</span></div><div class="counter-label">Ans d'expérience</div></div>
+        <div class="reveal"><div class="counter-num"><span class="counter" data-years-exp="true" data-target="9">0</span><span class="counter-suffix">+</span></div><div class="counter-label">Ans d'expérience</div></div>
         <div class="reveal reveal-delay-1"><div class="counter-num"><span class="counter" data-target="2">0</span></div><div class="counter-label">Cantons couverts</div></div>
-        <div class="reveal reveal-delay-2"><div class="counter-num"><span class="counter" data-target="7">0</span><span class="counter-suffix">j/7</span></div><div class="counter-label">Disponibilité</div></div>
+        <div class="reveal reveal-delay-2"><div class="counter-num"><span class="counter" data-target="5">0</span><span class="counter-suffix">j/7</span></div><div class="counter-label">Disponibilité</div></div>
         <div class="reveal reveal-delay-3"><div class="counter-num"><span class="counter" data-target="30">0</span><span class="counter-suffix">'</span></div><div class="counter-label">Délai de réponse</div></div>
       </div>
     </div>
@@ -499,7 +499,7 @@ footer{background:var(--ink);padding:3rem;display:flex;align-items:center;justif
         <div style="position:relative" class="reveal-left">
           <div class="about-blob">🧠
             <div class="about-float-badge">✔ Infirmier<br>Reconnu LAMal</div>
-            <div class="about-float-stat"><strong class="counter" data-target="9">0</strong>ans en psychiatrie</div>
+            <div class="about-float-stat"><strong class="counter" data-years-exp="true" data-target="9">0</strong>ans en psychiatrie</div>
           </div>
         </div>
         <div class="about-text reveal-right">
@@ -583,7 +583,7 @@ footer{background:var(--ink);padding:3rem;display:flex;align-items:center;justif
           <h3 style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:400;margin-bottom:1.8rem">Informations pratiques</h3>
           <div class="contact-item"><div class="contact-icon">📞</div><div><div class="contact-label">Téléphone</div><div class="contact-val"><a href="tel:+41784477846">078 447 78 46</a></div></div></div>
           <div class="contact-item"><div class="contact-icon">✉️</div><div><div class="contact-label">Email</div><div class="contact-val"><a href="mailto:jordan.gandrey@curacasa-hin.ch">jordan.gandrey@curacasa-hin.ch</a></div></div></div>
-          <div class="contact-item"><div class="contact-icon">⏰</div><div><div class="contact-label">Disponibilités</div><div class="contact-val">Lun–Sam : 7h–20h · Dim : 8h–13h</div></div></div>
+          <div class="contact-item"><div class="contact-icon">⏰</div><div><div class="contact-label">Disponibilités</div><div class="contact-val">Lun–Ven : 8h–18h</div></div></div>
           <div class="contact-item"><div class="contact-icon">🏥</div><div><div class="contact-label">Remboursement</div><div class="contact-val">Reconnu LAMal — Sur prescription médicale</div></div></div>
           <div class="contact-item"><div class="contact-icon">🔗</div><div><div class="contact-label">Partenaires</div><div class="contact-val">CMS · Équipes mobiles psy · Hôpitaux psychiatriques</div></div></div>
         </div>
@@ -681,6 +681,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
   var CONTACT_EMAIL = 'jordan.gandrey@curacasa-hin.ch';
 
+  // ── ANNÉES D'EXPÉRIENCE (calculées automatiquement depuis le 01.08.2016) ──
+  (function() {
+    var start = new Date(2016, 7, 1);
+    var now = new Date();
+    var years = now.getFullYear() - start.getFullYear();
+    var anniversaryPassed = (now.getMonth() > start.getMonth()) ||
+      (now.getMonth() === start.getMonth() && now.getDate() >= start.getDate());
+    if (!anniversaryPassed) years -= 1;
+    document.querySelectorAll('[data-years-exp="true"]').forEach(function(el) {
+      el.setAttribute('data-target', years);
+    });
+  })();
+
   // ── NAVIGATION ──
   function showPage(name) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -758,7 +771,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function updateAvailability() {
     var zurich = getZurichDayAndHour();
     var dayIndex = zurich.dayIndex, h = zurich.hour;
-    var available = (dayIndex >= 1 && dayIndex <= 6 && h >= 7 && h < 20) || (dayIndex === 0 && h >= 8 && h < 13);
+    var available = dayIndex >= 1 && dayIndex <= 5 && h >= 8 && h < 18;
     var badge = document.getElementById('nav-badge');
     var availText = document.getElementById('avail-text');
     if (badge) {
