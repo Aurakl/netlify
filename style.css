@@ -9,17 +9,6 @@
 html{scroll-behavior:smooth;}
 body{font-family:'Outfit',sans-serif;background:var(--paper);color:var(--ink);overflow-x:hidden;}
 
-/* LOADER */
-#loader{position:fixed;inset:0;z-index:10000;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;transition:opacity .6s,visibility .6s;}
-#loader.done{opacity:0;visibility:hidden;}
-.loader-logo{font-family:'Playfair Display',serif;font-size:2rem;color:#fff;letter-spacing:.08em;opacity:0;animation:fadeIn .4s .1s forwards;}
-.loader-logo span{color:var(--clay-light);}
-.loader-bar{width:180px;height:2px;background:rgba(255,255,255,.15);border-radius:2px;overflow:hidden;}
-.loader-fill{height:100%;width:0;background:var(--clay-light);animation:fillBar .7s .15s ease forwards;}
-.loader-sub{font-size:.78rem;color:rgba(255,255,255,.4);letter-spacing:.12em;text-transform:uppercase;opacity:0;animation:fadeIn .4s .25s forwards;}
-@keyframes fadeIn{to{opacity:1;}}
-@keyframes fillBar{to{width:100%;}}
-
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:1.2rem 3rem;display:flex;align-items:center;justify-content:space-between;transition:background .3s,box-shadow .3s,padding .3s;}
 nav.scrolled{background:rgba(250,247,243,.98);box-shadow:0 1px 0 var(--sand);padding:.9rem 3rem;}

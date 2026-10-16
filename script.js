@@ -19,11 +19,6 @@ document.addEventListener('DOMContentLoaded', function() {
   var copyrightYear = document.getElementById('copyright-year');
   if (copyrightYear) copyrightYear.textContent = new Date().getFullYear();
 
-  // ── LOADER (indépendant du chargement des ressources externes,
-  // pour ne jamais rester bloqué sur une connexion lente/instable) ──
-  var loader = document.getElementById('loader');
-  if (loader) setTimeout(function() { loader.classList.add('done'); }, 900);
-
   // ── NAV SCROLL ──
   var navbar = document.getElementById('navbar');
   if (navbar) {
