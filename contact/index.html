@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Contact — Jordan Gandrey, Infirmier Indépendant | Vaud &amp; Neuchâtel</title>
+<meta name="description" content="Contactez Jordan Gandrey, infirmier indépendant en santé mentale à domicile, pour toute demande de suivi ou de coordination, cantons de Vaud et Neuchâtel. Téléphone, email et formulaire de contact."/>
+<meta property="og:type" content="website"/>
+<meta property="og:locale" content="fr_CH"/>
+<meta property="og:title" content="Contact — Jordan Gandrey, Infirmier Indépendant"/>
+<meta property="og:description" content="Téléphone, email et formulaire de contact, cantons de Vaud et Neuchâtel."/>
+<meta property="og:url" content="https://gandrey-santementale.ch/contact/"/>
+<meta name="twitter:card" content="summary"/>
+<link rel="canonical" href="https://gandrey-santementale.ch/contact/"/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23c07a5a'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='34' font-style='italic' fill='%23fff' text-anchor='middle'%3EJ%3C/text%3E%3C/svg%3E"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalBusiness",
+  "name": "Jordan Gandrey - Infirmier en Santé Mentale",
+  "description": "Infirmier indépendant en santé mentale à domicile, cantons de Vaud et Neuchâtel. Remboursé par les assurances de base.",
+  "url": "https://gandrey-santementale.ch/",
+  "telephone": "+41784477846",
+  "email": "jordan.gandrey@curacasa-hin.ch",
+  "areaServed": [
+    {"@type": "AdministrativeArea", "name": "Canton de Vaud"},
+    {"@type": "AdministrativeArea", "name": "Canton de Neuchâtel"}
+  ],
+  "medicalSpecialty": "Psychiatric",
+  "priceRange": "Remboursé par les assurances de base",
+  "sameAs": ["https://www.linkedin.com/in/jordan-gandrey-7a633412a/"],
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "opens": "08:00",
+    "closes": "18:00"
+  }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="/style.css"/>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-logo">Jordan <span>Gandrey</span></div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+  <div class="loader-sub">Infirmier en santé mentale</div>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a class="nav-logo" href="/"><em>J.</em>Gandrey</a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="/a-propos/">À propos</a></li>
+    <li><a href="/approche/">Mon approche</a></li>
+    <li><a href="/soins/">Soins</a></li>
+    <li><a href="/contact/" class="active">Contact</a></li>
+    <li><span class="nav-badge" id="nav-badge">Disponible</span></li>
+    <li><a href="/rdv/" class="nav-pill">📅 Prendre RDV</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav-links"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- BOUTON FLOTTANT -->
+<button class="side-trigger" id="btn-side-trigger">📅 Demande de suivi</button>
+
+<!-- OVERLAY -->
+<div class="side-overlay" id="side-overlay"></div>
+
+<!-- SIDE PANEL -->
+<div class="side-panel" id="side-panel">
+  <div class="side-panel-header">
+    <h3>Demande de suivi</h3>
+    <button class="side-panel-close" id="btn-side-close">✕</button>
+  </div>
+  <div class="side-panel-body">
+    <div class="side-tabs">
+      <button class="side-tab active" id="stab-patient">👤 Patient</button>
+      <button class="side-tab" id="stab-pro">🏥 Pro de santé</button>
+    </div>
+    <!-- FORM PATIENT -->
+    <div class="side-form" id="side-form-patient">
+      <form id="form-patient" name="demande-patient" method="POST" data-netlify="true" netlify-honeypot="bot-field-patient">
+        <input type="hidden" name="form-name" value="demande-patient"/>
+        <p style="display:none"><label>Ne pas remplir : <input name="bot-field-patient"/></label></p>
+        <div class="side-form-group"><label>Prénom &amp; Nom *</label><input type="text" id="s-nom" name="nom" placeholder="Prénom Nom"/></div>
+        <div class="side-form-group"><label>Téléphone *</label><input type="tel" id="s-tel" name="telephone" placeholder="078 XXX XX XX"/></div>
+        <div class="side-form-group"><label>Date souhaitée *</label><input type="date" id="s-date" name="date"/></div>
+        <div class="side-form-group"><label>Heure * (09h–16h)</label><input type="time" id="s-heure" name="heure" min="09:00" max="16:00"/></div>
+        <div class="side-form-group"><label>Type de soin *</label>
+          <select id="s-soin" name="soin">
+            <option value="">Sélectionner...</option>
+            <option>Entretien infirmier / soutien</option>
+            <option>Préparation du pilulier</option>
+            <option>Injection retard (neuroleptique)</option>
+            <option>Surveillance &amp; étayage psychiatrique</option>
+            <option>Entretien motivationnel</option>
+            <option>Autre / première prise de contact</option>
+          </select>
+        </div>
+        <div class="side-form-group"><label>Adresse *</label><input type="text" id="s-adresse" name="adresse" placeholder="Rue, ville, NPA"/></div>
+        <div class="side-note">✉️ Votre demande est envoyée directement, sans passer par votre messagerie.</div>
+        <button class="side-submit" type="submit" id="btn-book-patient">Confirmer le rendez-vous</button>
+      </form>
+      <div class="side-tel-block">
+        <div class="side-tel-label">Besoin d'aide ?</div>
+        <a href="tel:+41784477846">📞 078 447 78 46</a>
+        <div class="side-tel-sub">Contactez-moi directement</div>
+      </div>
+    </div>
+    <!-- FORM PRO -->
+    <div class="side-form" id="side-form-pro" hidden>
+      <form id="form-pro" name="demande-pro" method="POST" data-netlify="true" netlify-honeypot="bot-field-pro">
+        <input type="hidden" name="form-name" value="demande-pro"/>
+        <p style="display:none"><label>Ne pas remplir : <input name="bot-field-pro"/></label></p>
+        <div class="side-form-group"><label>Prénom &amp; Nom *</label><input type="text" id="sp-nom" name="nom" placeholder="Prénom Nom"/></div>
+        <div class="side-form-group"><label>Profession *</label>
+          <select id="sp-profession" name="profession">
+            <option value="">Sélectionner...</option>
+            <option>Psychiatre</option>
+            <option>Médecin généraliste</option>
+            <option>Infirmier(e) CMS</option>
+            <option>Psychologue FSP</option>
+            <option>Assistant(e) social(e)</option>
+            <option>Équipe mobile psychiatrique</option>
+            <option>Autre</option>
+          </select>
+        </div>
+        <div class="side-form-group"><label>Téléphone *</label><input type="tel" id="sp-tel" name="telephone" placeholder="078 XXX XX XX"/></div>
+        <div class="side-form-group"><label>Date souhaitée *</label><input type="date" id="sp-date" name="date"/></div>
+        <div class="side-form-group"><label>Heure * (09h–16h)</label><input type="time" id="sp-heure" name="heure" min="09:00" max="16:00"/></div>
+        <div class="side-form-group"><label>Motif *</label>
+          <select id="sp-motif" name="motif">
+            <option value="">Sélectionner...</option>
+            <option>Demande de suivi pour un patient</option>
+            <option>Coordination de soins</option>
+            <option>Relais post-hospitalisation</option>
+            <option>Réunion de synthèse / staff</option>
+            <option>Autre</option>
+          </select>
+        </div>
+        <div class="side-note">🏥 Votre demande est envoyée directement, sans passer par votre messagerie.</div>
+        <button class="side-submit" type="submit" id="btn-book-pro">Envoyer la demande</button>
+      </form>
+      <div class="side-tel-block">
+        <div class="side-tel-label">Besoin d'aide ?</div>
+        <a href="tel:+41784477846">📞 078 447 78 46</a>
+        <div class="side-tel-sub">Contactez-moi directement</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="contact-section" class="section" style="padding-top:8rem">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center;max-width:560px;margin:0 auto 3.5rem">
+      <div class="section-eyebrow" style="justify-content:center">Me joindre</div>
+      <h2 class="section-h2">Restons en<br><em>contact</em></h2>
+    </div>
+    <div class="contact-grid">
+      <div class="reveal-left">
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:400;margin-bottom:1.8rem">Informations pratiques</h3>
+        <div class="contact-item"><div class="contact-icon">📞</div><div><div class="contact-label">Téléphone</div><div class="contact-val"><a href="tel:+41784477846">078 447 78 46</a></div></div></div>
+        <div class="contact-item"><div class="contact-icon">✉️</div><div><div class="contact-label">Email</div><div class="contact-val"><a href="mailto:jordan.gandrey@curacasa-hin.ch">jordan.gandrey@curacasa-hin.ch</a></div></div></div>
+        <div class="contact-item"><div class="contact-icon">⏰</div><div><div class="contact-label">Disponibilités</div><div class="contact-val">Lun–Ven : 8h–18h</div></div></div>
+        <div class="contact-item"><div class="contact-icon">🏥</div><div><div class="contact-label">Remboursement</div><div class="contact-val">Remboursé par les assurances de base — Sur prescription médicale</div></div></div>
+        <div class="contact-item"><div class="contact-icon">🔗</div><div><div class="contact-label">Partenaires</div><div class="contact-val">Réseau santé Nord Broye · Médecins traitants · Psychiatres · Infirmiers indépendants</div></div></div>
+      </div>
+      <div class="reveal-right">
+        <div class="contact-form-wrap">
+          <form id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="contact"/>
+            <p style="display:none"><label>Ne pas remplir : <input name="bot-field"/></label></p>
+            <div class="form-row">
+              <div class="form-group"><label>Prénom</label><input type="text" name="prenom" placeholder="Prénom" required/></div>
+              <div class="form-group"><label>Nom</label><input type="text" name="nom" placeholder="Nom" required/></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group form-full"><label>Email ou téléphone</label><input type="text" name="contact" placeholder="contact@email.ch ou 07…" required/></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group form-full"><label>Message</label><textarea name="message" placeholder="Question, demande d'information, coordination…" required></textarea></div>
+            </div>
+            <button type="submit" class="form-submit" id="btn-contact-send">Envoyer le message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-box">
+    <div class="modal-icon" id="modal-icon">✉️</div>
+    <h3 id="modal-title"></h3>
+    <p id="modal-text"></p>
+    <button class="modal-close" id="modal-close-btn">Fermer</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo"><em>J.</em>Gandrey — Infirmier Indépendant</div>
+  <ul class="footer-links">
+    <li><a href="/a-propos/">À propos</a></li>
+    <li><a href="/approche/">Approche</a></li>
+    <li><a href="/soins/">Soins</a></li>
+    <li><a href="/rdv/">RDV</a></li>
+    <li><a href="/contact/">Contact</a></li>
+    <li><a href="/mentions-legales/">Mentions légales</a></li>
+  </ul>
+  <div class="footer-legal">© <span id="copyright-year">2025</span> · RCC : D965733 · Vaud &amp; Neuchâtel</div>
+</footer>
+
+<script src="/script.js"></script>
+</body>
+</html>
