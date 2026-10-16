@@ -61,12 +61,14 @@ document.addEventListener('DOMContentLoaded', function() {
     var available = dayIndex >= 1 && dayIndex <= 5 && h >= 8 && h < 18;
     var badge = document.getElementById('nav-badge');
     var availText = document.getElementById('avail-text');
+    var availSub = document.getElementById('avail-sub');
     if (badge) {
       badge.textContent = available ? 'Disponible' : 'Absent';
       badge.style.background = available ? 'rgba(107,143,120,.12)' : 'rgba(192,120,90,.10)';
       badge.style.color = available ? 'var(--moss)' : 'var(--clay)';
     }
-    if (availText) availText.textContent = available ? "Disponible aujourd'hui" : 'Indisponible ce créneau';
+    if (availText) availText.textContent = available ? "Disponible aujourd'hui" : 'Absent pour le moment';
+    if (availSub) availSub.textContent = available ? 'Réponse sous 30 minutes' : 'De retour Lun–Ven, 8h–18h';
   }
   updateAvailability();
   setInterval(updateAvailability, 60000);
